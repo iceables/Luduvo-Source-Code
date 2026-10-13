@@ -1,0 +1,977 @@
+.dashlay {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    max-width: 964px !important;
+    box-sizing: border-box !important;
+}
+.dashl {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 410px !important;
+    gap: 8px !important;
+}
+.dashr {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 530px !important;
+    gap: 24px !important;
+}
+.feedpg {
+    width: 100% !important;
+    background: transparent !important;
+    border-radius: 0 0 6px 6px !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding: 40px 0 !important;
+    box-sizing: border-box !important;
+    min-height: calc(100vh - 115px) !important;
+}
+.chrcrd {
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 346px !important;
+    height: 330px !important;
+    background: #E0E0E0 !important;
+    border: none !important;
+    border-radius: 0px 12px 12px 0px !important;
+    box-shadow: 4px 0 0 0 #C1C1C1, 0 4px 0 0 #C1C1C1, 0 -4px 0 0 #C1C1C1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    margin-top: 15px !important;
+    margin-left: -16px !important;
+}
+.chrimg {
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15)) !important;
+}
+.carsec {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+}
+.carttl {
+    font-size: 1.8rem !important;
+    font-weight: bold !important;
+    color: #333333 !important;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+}
+.carcnt {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 530px !important;
+    height: 260px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+.cartrk {
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.cararr {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    font-size: 36px !important;
+    padding: 0 !important;
+    text-shadow: 0px 1px 6px rgba(0, 0, 0, 0.6) !important;
+}
+.cararrl {
+    left: 16px !important;
+}
+.cararrr {
+    right: 16px !important;
+}
+.carcnt:hover .cararr {
+    opacity: 0.8 !important;
+}
+.carsld {
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    text-decoration: none !important;
+}
+.carimg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+.carovl {
+    position: absolute !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 60% !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%) !important;
+    pointer-events: none !important;
+}
+.carinf {
+    position: absolute !important;
+    left: 20px !important;
+    bottom: 20px !important;
+    text-align: left !important;
+    max-width: 80% !important;
+    color: #FFFFFF !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+.carnm {
+    font-family: 'Ubuntu' !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 20px !important;
+    margin: 0 0 2px 0 !important;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8) !important;
+    transition: font-size 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.carcnt:hover .carnm {
+    font-size: 24px !important;
+}
+.cardsc {
+    font-family: 'Ubuntu' !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    line-height: 16px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    margin: 0 !important;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8) !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    transition: font-size 0.3s ease !important;
+}
+.carcnt:hover .cardsc {
+    font-size: 14px !important;
+}
+.feedinbox {
+    box-sizing: border-box !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 52px !important;
+    left: 0 !important;
+    top: 34px !important;
+    background: #E0E0E0 !important;
+    border: 2px solid rgba(61, 61, 61, 0.25) !important;
+    border-radius: 12px !important;
+    transition: border-color 0.2s ease !important;
+}
+.feedinbox:focus-within {
+    border-color: rgba(61, 61, 61, 0.25) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.feedinbox.inerr {
+    border-color: #ff3b30 !important;
+}
+.feedinbox.inerr:focus-within {
+    border-color: #ff3b30 !important;
+}
+.feedin,
+.feedin:focus,
+.feedin:focus-visible,
+.feedin:active {
+    box-sizing: border-box !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding-left: 16px !important;
+    padding-right: 66px !important;
+    font-family: 'Ubuntu' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: #3D3D3D !important;
+    box-shadow: none !important;
+}
+.feedin::placeholder {
+    font-family: 'Ubuntu' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: rgba(61, 61, 61, 0.25) !important;
+}
+.feedsnd {
+    position: absolute !important;
+    width: 44px !important;
+    height: 44px !important;
+    right: 4px !important;
+    top: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer !important;
+    transition: transform 0.2s !important;
+    color: #000000 !important;
+    opacity: 0.25 !important;
+}
+.feedsnd:hover {
+    transform: scale(1.1) !important;
+    opacity: 0.5 !important;
+}
+.feederr {
+    position: absolute !important;
+    top: 88px !important;
+    left: 16px !important;
+    color: #ff3b30 !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    z-index: 10 !important;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none !important;
+}
+.feederr.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.rctbdg {
+    box-sizing: border-box !important;
+    position: relative !important;
+    width: 75px !important;
+    height: 34px !important;
+    left: 99px !important;
+    top: 0 !important;
+    bottom: auto !important;
+    margin-top: -2px !important;
+    margin-bottom: 0px !important;
+    background: rgba(120, 120, 120, 0.45) !important;
+    border-width: 0px 2px 2px 2px !important;
+    border-style: solid !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 0px 0px 6px 6px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    z-index: 5 !important;
+    transition: background 0.2s, border-color 0.2s !important;
+}
+.rctbdg:hover {
+    background: rgba(120, 120, 120, 0.6) !important;
+}
+.rctbdg.reacted {
+    background: rgba(116, 35, 203, 0.45) !important;
+    border-color: rgba(255, 255, 255, 0.23) !important;
+}
+.rctbdg.reacted:hover {
+    background: rgba(116, 35, 203, 0.6) !important;
+}
+.rctico {
+    position: absolute !important;
+    width: 28px !important;
+    height: 28px !important;
+    left: 4px !important;
+    top: 3px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    color: #FFFFFF !important;
+}
+.rctcnt {
+    position: absolute !important;
+    width: 50px !important;
+    height: 34px !important;
+    left: 32px !important;
+    top: 0px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+.dgtcnt {
+    display: inline-block !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    width: 11px !important;
+    vertical-align: top !important;
+}
+.dgtstp {
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.dgtnum {
+    display: block !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    text-align: center !important;
+    font-family: 'Ubuntu' !important;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    color: #FFFFFF !important;
+    flex-shrink: 0 !important;
+}
+@keyframes reaction-pop-anim {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15) translateY(-2px);
+        background: rgba(116, 35, 203, 0.7) !important;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.rctpop {
+    animation: reaction-pop-anim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+.tabcnt {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 530px !important;
+    height: auto !important;
+    background: transparent !important;
+    border-radius: 24px !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+.tablst {
+    position: absolute !important;
+    left: 16px !important;
+    top: 2px !important;
+    display: flex !important;
+    gap: 8px !important;
+    z-index: 5 !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+.tabbtn {
+    box-sizing: border-box !important;
+    height: 34px !important;
+    padding: 0 16px !important;
+    background: rgba(116, 35, 203, 0.15) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    border-bottom: none !important;
+    border-radius: 8px 8px 0px 0px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-family: 'Ubuntu' !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease !important;
+    outline: none !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+.tabbtn:hover {
+    color: #FFFFFF !important;
+    background: rgba(116, 35, 203, 0.25) !important;
+}
+.tabbtn.active {
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-color: transparent !important;
+}
+.tabind {
+    box-sizing: border-box !important;
+    position: absolute !important;
+    background: rgba(116, 35, 203, 0.45) !important;
+    border: 2px solid rgba(255, 255, 255, 0.23) !important;
+    border-bottom: none !important;
+    border-radius: 8px 8px 0px 0px !important;
+    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+.pstlst {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    left: 0 !important;
+    margin-top: 94px !important;
+    overflow-y: visible !important;
+    transition: margin-top 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1) !important;
+}
+.tabcnt.haserr .pstlst {
+    margin-top: 118px !important;
+}
+.pstitm {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 85px !important;
+    margin-bottom: 6px !important;
+    animation: postreducedbounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1) backwards;
+    transition: min-height 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.pstitm.offscreen .pstcrd,
+.pstitm.offscreen .rctbdg {
+    display: none !important;
+}
+
+.pstitm:nth-child(1) { animation-delay: 0.05s; }
+.pstitm:nth-child(2) { animation-delay: 0.1s; }
+.pstitm:nth-child(3) { animation-delay: 0.15s; }
+.pstitm:nth-child(4) { animation-delay: 0.2s; }
+.pstitm:nth-child(5) { animation-delay: 0.25s; }
+.pstitm:nth-child(6) { animation-delay: 0.3s; }
+.pstitm:nth-child(7) { animation-delay: 0.35s; }
+.pstitm:nth-child(8) { animation-delay: 0.4s; }
+.pstitm:nth-child(9) { animation-delay: 0.45s; }
+.pstitm:nth-child(10) { animation-delay: 0.5s; }
+@keyframes postreducedbounce {
+    0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(8px);
+    }
+    60% {
+        opacity: 0.95;
+        transform: scale(1.03) translateY(-1px);
+    }
+    85% {
+        transform: scale(0.99) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+@keyframes postFocusAnim {
+    0% {
+        opacity: 0.4;
+        transform: scale(0.96) translateY(6px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.01) translateY(-1px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+.pstitm.focused .pstcrd,
+.pstcrd.focused {
+    animation: postFocusAnim 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards !important;
+}
+.pstitm:first-child {
+    margin-top: 4px !important;
+}
+.pstcrd {
+    box-sizing: border-box !important;
+    position: relative !important;
+    width: 100% !important;
+    min-height: 85px !important;
+    background: #E0E0E0 !important;
+    border: 2px solid #C1C1C1 !important;
+    border-radius: 12px !important;
+    transition: min-height 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease !important;
+}
+.pstavt {
+    position: absolute !important;
+    width: 85px !important;
+    height: 85px !important;
+    left: -2px !important;
+    top: -2px !important;
+    border-radius: 10px 0px 0px 10px !important;
+    border-right: 2px solid #C1C1C1 !important;
+    border-bottom: none !important;
+    overflow: hidden !important;
+    transition: border-bottom 0.2s ease, border-radius 0.2s ease !important;
+}
+.pstavt img {
+    width: 85px !important;
+    height: 85px !important;
+    object-fit: cover !important;
+}
+.pstcrd.expanded .pstavt,
+.pstitm.expanded .pstavt {
+    border-bottom: 2px solid #C1C1C1 !important;
+    border-bottom-left-radius: 10px !important;
+}
+.psthdr {
+    position: relative !important;
+    margin-left: 99px !important;
+    padding-top: 10px !important;
+    padding-right: 70px !important;
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 12px !important;
+}
+.pstaut {
+    font-family: 'Ubuntu' !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    line-height: 24px !important;
+    color: #8B0000 !important;
+    text-decoration: none !important;
+}
+.pstaut:hover {
+    text-decoration: none !important;
+}
+.psttme {
+    font-family: 'Ubuntu' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    line-height: 24px !important;
+    color: #718096 !important;
+    user-select: none !important;
+    flex-shrink: 0 !important;
+    cursor: default !important;
+}
+.pstact {
+    position: absolute !important;
+    right: 12px !important;
+    top: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    z-index: 5 !important;
+    opacity: 0 !important;
+    transform: scale(0.9) translateY(-2px) !important;
+    visibility: hidden !important;
+    transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.25s !important;
+}
+.pstitm:hover .pstact,
+.pstcrd:hover .pstact {
+    opacity: 1 !important;
+    transform: scale(1) translateY(0) !important;
+    visibility: visible !important;
+}
+.pstrpl {
+    position: relative !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    color: #3D3D3D !important;
+    opacity: 0.25 !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+.pstrpl:hover,
+.pstrpl.active {
+    transform: scale(1.15) !important;
+    opacity: 1 !important;
+}
+.pstrct {
+    position: relative !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    color: #3D3D3D !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+.pstrct:hover {
+    transform: scale(1.15) !important;
+    opacity: 1 !important;
+}
+.pstflg {
+    position: relative !important;
+    width: 28px !important;
+    height: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    color: #3D3D3D !important;
+    opacity: 0.25 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+.pstflg:hover {
+    transform: scale(1.15) !important;
+    opacity: 1 !important;
+    text-decoration: none !important;
+}
+.pbdy {
+    position: relative !important;
+    margin-left: 99px !important;
+    margin-top: 4px !important;
+    margin-right: 16px !important;
+    margin-bottom: 8px !important;
+    font-family: 'Ubuntu' !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: #3D3D3D !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    cursor: pointer !important;
+    max-height: 44px !important;
+    transition: max-height 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease !important;
+}
+.pbdy.expanded {
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    max-height: 1000px !important;
+    overflow: visible !important;
+}
+.pstico {
+    width: 20px !important;
+    height: 20px !important;
+    object-fit: contain !important;
+}
+
+@keyframes replyExpandAnim {
+    0% {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cmtEntryAnim {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(-6px);
+    }
+    60% {
+        opacity: 0.95;
+        transform: scale(1.02) translateY(1px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes replyInputCollapse {
+    0% {
+        opacity: 1;
+        height: 38px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        transform: translateY(0) scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        height: 0;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        border-width: 0 !important;
+        transform: translateY(-6px) scaleY(0.6);
+    }
+}
+
+.cmtlst {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 6px !important;
+    margin-left: 20px !important;
+    width: calc(100% - 20px) !important;
+    box-sizing: border-box !important;
+    animation: replyExpandAnim 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.cmtlst:empty {
+    display: none !important;
+    margin-top: 0 !important;
+}
+
+.cmtnest {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 8px !important;
+    margin-left: 23px !important;
+    padding-left: 25px !important;
+    border-left: 2px solid #C1C1C1 !important;
+    box-sizing: border-box !important;
+    width: calc(100% - 23px) !important;
+}
+
+.cmtnest-max {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    border-left: none !important;
+    width: 100% !important;
+}
+
+.cmtrep {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #718096 !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+}
+
+.cmtrep i {
+    font-size: 11px !important;
+}
+
+.cmtrep a {
+    color: #912ADF !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.cmtrep a:hover {
+    text-decoration: underline !important;
+}
+
+.feedemt {
+    margin-top: 16px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 14px !important;
+    color: #718096 !important;
+    background: #FAFAFA !important;
+    border: 2px dashed #C1C1C1 !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+}
+
+.cmtitm {
+    position: relative !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    animation: cmtEntryAnim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards !important;
+}
+
+.cmtcrd {
+    position: relative !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    background: #E0E0E0 !important;
+    border: 2px solid #C1C1C1 !important;
+    border-radius: 12px !important;
+    padding: 8px 65px 8px 56px !important;
+    min-height: 48px !important;
+    box-shadow: none !important;
+    transition: min-height 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease !important;
+}
+
+.cmtavt {
+    position: absolute !important;
+    left: -2px !important;
+    top: -2px !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 10px 0 0 10px !important;
+    border-right: 2px solid #C1C1C1 !important;
+    overflow: hidden !important;
+}
+
+.cmtavt img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.cmthdr {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 2px !important;
+}
+
+.cmtaut {
+    font-family: 'Ubuntu' !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: #8B0000 !important;
+    text-decoration: none !important;
+}
+
+.cmttme {
+    font-family: 'Ubuntu' !important;
+    font-size: 11px !important;
+    color: #718096 !important;
+}
+
+.cmtrctbdg {
+    position: relative !important;
+    width: 56px !important;
+    height: 24px !important;
+    left: 48px !important;
+    top: 0 !important;
+    bottom: auto !important;
+    margin-top: -2px !important;
+    margin-bottom: 0px !important;
+    border-radius: 0 0 5px 5px !important;
+    z-index: 4 !important;
+}
+
+.cmtrctbdg .rctico {
+    width: 20px !important;
+    height: 20px !important;
+    left: 2px !important;
+    top: 1px !important;
+    font-size: 12px !important;
+}
+
+.cmtrctbdg .rctcnt {
+    width: 32px !important;
+    height: 24px !important;
+    left: 22px !important;
+    top: 0 !important;
+}
+
+.cmtrctbdg .dgtcnt,
+.cmtrctbdg .dgtnum {
+    height: 20px !important;
+    line-height: 20px !important;
+    font-size: 14px !important;
+}
+
+.cmtbdy {
+    font-family: 'Ubuntu' !important;
+    font-size: 13px !important;
+    line-height: 17px !important;
+    color: #3D3D3D !important;
+    word-break: break-all !important;
+}
+
+.cmtact {
+    position: absolute !important;
+    right: 10px !important;
+    top: 8px !important;
+    transform: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.cmtinbox {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    margin-left: 0 !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 38px !important;
+    background: #E0E0E0 !important;
+    border: 1px solid rgba(61, 61, 61, 0.3) !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    animation: cmtEntryAnim 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards !important;
+}
+
+.cmtinbox.closing {
+    animation: replyInputCollapse 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+}
+
+.cmtinbox .feedin {
+    font-size: 13px !important;
+    padding-left: 10px !important;
+    padding-right: 40px !important;
+}
+
+.cmtinbox .feedsnd {
+    width: 32px !important;
+    height: 32px !important;
+    right: 2px !important;
+    top: 2px !important;
+}
+
+.cmtmre {
+    font-family: 'Ubuntu' !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #7423CB !important;
+    cursor: pointer !important;
+    display: block !important;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+    margin-left: 48px !important;
+    text-decoration: none !important;
+}
+
+.cmtmre:hover {
+    text-decoration: none !important;
+}
+
+.bkcbtn {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #7423CB !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    margin-bottom: 12px !important;
+    text-decoration: none !important;
+}
+
+.bkcbtn:hover {
+    text-decoration: underline !important;
+}
+
+@media (max-width: 996px) {
+    .dashlay {
+        flex-direction: column !important;
+        width: 100% !important;
+        align-items: center !important;
+        gap: 40px !important;
+        padding: 0 20px !important;
+    }
+    .dashl, .dashr {
+        width: 100% !important;
+        max-width: 530px !important;
+    }
+    .chrcrd {
+        margin-left: -20px !important;
+        max-width: 350px !important;
+    }
+}

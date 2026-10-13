@@ -1,0 +1,38 @@
+<div class="prfact" id="profileActions">
+    {{if .IsOwnProfile}}
+    <a href="/settings" hx-get="/settings" hx-target="body" hx-push-url="true" class="primary hpyprim hpyinl hpysm" style="text-decoration: none;">
+        <img src="/static/useful/icons/pen.png" class="hpyico" alt="">
+        <span>Edit Profile</span>
+    </a>
+    {{else}}
+    {{if eq .FriendStatus "pending_sent"}}
+    <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/friends/cancel/{{.ProfileUser.ID}}" hx-target="#profileActions" hx-swap="outerHTML">
+        <img src="/static/useful/icons/friends.png" class="hpyico" alt="">
+        <span>Cancel Friend Request</span>
+    </button>
+    {{else if eq .FriendStatus "pending_received"}}
+    <button type="button" class="primary hpysuc hpyinl hpysm" hx-post="/friends/accept/{{.ProfileUser.ID}}" hx-target="#profileActions" hx-swap="outerHTML">
+        <img src="/static/useful/icons/friends.png" class="hpyico" alt="">
+        <span>Accept Friend Request</span>
+    </button>
+    {{else if eq .FriendStatus "friends"}}
+    <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/friends/remove/{{.ProfileUser.ID}}" hx-target="#profileActions" hx-swap="outerHTML">
+        <img src="/static/useful/icons/friends.png" class="hpyico" alt="">
+        <span>Remove Friend</span>
+    </button>
+    {{else}}
+    <button type="button" class="primary hpysuc hpyinl hpysm" hx-post="/friends/send/{{.ProfileUser.ID}}" hx-target="#profileActions" hx-swap="outerHTML">
+        <img src="/static/useful/icons/friends.png" class="hpyico" alt="">
+        <span>Add Friend</span>
+    </button>
+    {{end}}
+    <button type="button" class="primary hpywrn hpyinl hpysm">
+        <img src="/static/useful/icons/trade.png" class="hpyico" alt="">
+        <span>Trade</span>
+    </button>
+    <button type="button" class="primary hpyprim hpyinl hpysm">
+        <img src="/static/useful/icons/messages.png" class="hpyico" alt="">
+        <span>Message</span>
+    </button>
+    {{end}}
+</div>

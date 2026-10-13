@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar"><span class="title">Email</span></div>
+        <div class="pane">
+            <div class="setcrd" style="padding:16px">
+                <h2>Email verification</h2>
+                <p>{{.Message}}</p>
+                <a href="/login" hx-get="/login" hx-target="body" hx-push-url="true">Log in</a>
+            </div>
+        </div>
+    </div>
+</div>

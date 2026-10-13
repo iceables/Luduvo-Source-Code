@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/frn.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Friends</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="frmlay">
+                <div class="frmmain" style="padding-top: 24px !important;">
+                    <div class="tabcnt settabcnt" style="max-width: 100% !important;">
+                        {{if .IsOwnFriendsPage}}
+                        <div class="tablst">
+                            <div class="tabind"></div>
+                            <button class="tabbtn{{if eq .ActiveTab "requests"}} active{{end}}" onclick="window.switchFriendsTab('requests', event)">Requests {{if .IncomingRequests}}({{.IncomingRequests | len}}){{end}}</button>
+                            <button class="tabbtn{{if eq .ActiveTab "outgoing"}} active{{end}}" onclick="window.switchFriendsTab('outgoing', event)">Outgoing {{if .OutgoingRequests}}({{.OutgoingRequests | len}}){{end}}</button>
+                            <button class="tabbtn{{if eq .ActiveTab "friends"}} active{{end}}" onclick="window.switchFriendsTab('friends', event)">Friends {{if .FriendsList}}({{.FriendsList | len}}){{end}}</button>
+                        </div>
+                        {{else}}
+                        <div class="tablst">
+                            <div class="tabind"></div>
+                            <button class="tabbtn active">Friends {{if .FriendsList}}({{.FriendsList | len}}){{end}}</button>
+                        </div>
+                        {{end}}
+
+                        <div class="settabvwp">
+                            {{if .IsOwnFriendsPage}}
+                            <div id="tab-requests" class="settabcntnt{{if eq .ActiveTab "requests"}} active{{end}}">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Pending Requests</h3>
+                                    {{if .IncomingRequests}}
+                                    <div class="frngrd">
+                                        {{range .IncomingRequests}}
+                                        <div class="frncrd">
+                                            <div class="frntop">
+                                                <a href="/user/{{.UserID}}" hx-get="/user/{{.UserID}}" hx-target="body" hx-push-url="true" class="frnavt">
+                                                    <img src="/api/v1/avatar/headshot/{{.UserID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.Username}}">
+                                                </a>
+                                                <div class="frndtl">
+                                                    <a href="/user/{{.UserID}}" hx-get="/user/{{.UserID}}" hx-target="body" hx-push-url="true" class="frndn">{{.DisplayName}}</a>
+                                                    <span class="frnun">@{{.Username}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="frnact">
+                                                <button type="button" class="primary hpysuc hpyinl hpysm" hx-post="/friends/accept/{{.UserID}}" hx-target="closest .frncrd" hx-swap="outerHTML">
+                                                    <span>Accept</span>
+                                                </button>
+                                                <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/friends/decline/{{.UserID}}" hx-target="closest .frncrd" hx-swap="outerHTML">
+                                                    <span>Decline</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        {{end}}
+                                    </div>
+                                    {{else}}
+                                    <div class="frnemt">You have no pending friend requests.</div>
+                                    {{end}}
+                                </div>
+                            </div>
+
+                            <div id="tab-outgoing" class="settabcntnt{{if eq .ActiveTab "outgoing"}} active{{end}}">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Outgoing Requests</h3>
+                                    {{if .OutgoingRequests}}
+                                    <div class="frngrd">
+                                        {{range .OutgoingRequests}}
+                                        <div class="frncrd">
+                                            <div class="frntop">
+                                                <a href="/user/{{.UserID}}" hx-get="/user/{{.UserID}}" hx-target="body" hx-push-url="true" class="frnavt">
+                                                    <img src="/api/v1/avatar/headshot/{{.UserID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.Username}}">
+                                                </a>
+                                                <div class="frndtl">
+                                                    <a href="/user/{{.UserID}}" hx-get="/user/{{.UserID}}" hx-target="body" hx-push-url="true" class="frndn">{{.DisplayName}}</a>
+                                                    <span class="frnun">@{{.Username}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="frnact">
+                                                <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/friends/cancel/{{.UserID}}" hx-target="closest .frncrd" hx-swap="outerHTML">
+                                                    <span>Cancel Request</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        {{end}}
+                                    </div>
+                                    {{else}}
+                                    <div class="frnemt">You have no outgoing friend requests.</div>
+                                    {{end}}
+                                </div>
+                            </div>
+                            {{end}}
+
+                            <div id="tab-friends" class="settabcntnt{{if eq .ActiveTab "friends"}} active{{end}}">
+                                <div class="setcrd">
+                                    <h3 class="setttl">{{if not .IsOwnFriendsPage}}{{.TargetUser.DisplayName}}'s Friends{{else}}Friends{{end}}</h3>
+                                    {{if .FriendsList}}
+                                    <div class="frngrd">
+                                        {{range .FriendsList}}
+                                        <div class="frncrd">
+                                            <div class="frntop">
+                                                <a href="/user/{{.UserID}}" hx-get="/user/{{.UserID}}" hx-target="body" hx-push-url="true" class="frnavt">
+                                                    <img src="/api/v1/avatar/headshot/{{.UserID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.Username}}">
+                                                </a>
+                                                <div class="frndtl">
+                                                    <a href="/user/{{.UserID}}" hx-get="/user/{{.UserID}}" hx-target="body" hx-push-url="true" class="frndn">{{.DisplayName}}</a>
+                                                    <span class="frnun">@{{.Username}}</span>
+                                                </div>
+                                            </div>
+                                            {{if $.IsOwnFriendsPage}}
+                                            <div class="frnact">
+                                                <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/friends/remove/{{.UserID}}" hx-target="closest .frncrd" hx-swap="outerHTML">
+                                                    <span>Remove</span>
+                                                </button>
+                                            </div>
+                                            {{end}}
+                                        </div>
+                                        {{end}}
+                                    </div>
+                                    {{else}}
+                                    <div class="frnemt">No friends to display.</div>
+                                    {{end}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/friends/friends.js"></script>

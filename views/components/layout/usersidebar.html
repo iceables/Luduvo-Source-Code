@@ -1,0 +1,57 @@
+<div class="sbar">
+    <a href="/currency" hx-get="/currency" hx-target="body" hx-push-url="true" class="sbtn sbtnvrt">
+        <img src="/static/useful/icons/vertice.png" class="sico" alt="Vertice">
+        <span class="navtxt" id="userVerticesCount">{{.Bucks}}</span>
+    </a>
+
+    <a href="/currency" hx-get="/currency" hx-target="body" hx-push-url="true" class="sbtn sbtntix">
+        <img src="/static/useful/icons/tix.png" class="sico" alt="Tix">
+        <span class="navtxt">{{.Bits}}</span>
+    </a>
+
+    <div class="navdiv sbardiv"></div>
+
+    <a href="/messages" hx-get="/messages" hx-target="body" hx-push-url="true" class="sbtn sbtnmsg">
+        <img src="/static/useful/icons/messages.png" class="sico" alt="Messages">
+        <span class="navtxt">99</span>
+    </a>
+
+    <a href="/friends" hx-get="/friends" hx-target="body" hx-push-url="true" class="sbtn sbtnfrn">
+        <img src="/static/useful/icons/friends.png" class="sico" alt="Friends">
+        <span class="navtxt">{{.PendingFriendRequestsCount}}</span>
+    </a>
+
+    <button class="pfpbtn sbtnpfp" onclick="toggleDropdown(event)">
+        <img src="/api/v1/avatar/headshot/{{.UserID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" class="pfpimg" alt="{{.Username}}">
+    </button>
+
+    <div id="userDropdown" class="udrop">
+        <span class="dropusr"><a href="/profile" hx-get="/profile" hx-target="body" hx-push-url="true" class="dropitm">{{.Username}}</a></span>
+        <div class="droplne"></div>
+        <a href="/avatar" hx-get="/avatar" hx-target="body" hx-push-url="true" class="dropitm">Avatar</a>
+        <a href="/create" hx-get="/create" hx-target="body" hx-push-url="true" class="dropitm">Create ...</a>
+        <a href="/redeem" hx-get="/redeem" hx-target="body" hx-push-url="true" class="dropitm">Redeem</a>
+        <a href="/settings" hx-get="/settings" hx-target="body" hx-push-url="true" class="dropitm">Settings</a>
+        {{if .IsAdmin}}
+        <a href="/admin" hx-get="/admin" hx-target="body" hx-push-url="true" class="dropitm">Admin</a>
+        {{end}}
+        <a href="/logout" hx-get="/logout" hx-target="body" hx-push-url="true" class="dropitm droplgo">Log out</a>
+    </div>
+</div>
+
+<script>
+    function toggleDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('userDropdown');
+        dropdown.classList.toggle('active');
+    }
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('userDropdown');
+        if (dropdown && dropdown.classList.contains('active')) {
+            const pfpButton = document.querySelector('.pfpbtn');
+            if (!dropdown.contains(event.target) && !pfpButton.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        }
+    });
+</script>

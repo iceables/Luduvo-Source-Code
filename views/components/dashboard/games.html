@@ -1,0 +1,91 @@
+<div class="carsec">
+    <h2 class="carttl">Playing right now</h2>
+    <div class="carcnt" id="heroGamesCarousel">
+        <button class="cararr cararrl" onclick="moveCarousel(-1, event)">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="cararr cararrr" onclick="moveCarousel(1, event)">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="cartrk">
+            {{range $game := .Games}}
+            <a href="/games/{{$game.ID}}" class="carsld">
+                <img src="/thumbnails/{{$game.ID}}.png"
+                     onerror="this.src='/static/useful/temp/pfp.png'; this.style.filter='blur(10px)';"
+                     alt="{{$game.Name}}" class="carimg">
+                <div class="carovl"></div>
+                <div class="carinf">
+                    <h3 class="carnm">{{$game.Name}}</h3>
+                    <p class="cardsc">{{$game.Description.String}}</p>
+                </div>
+            </a>
+            {{end}}
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        if (window.heroCarouselInterval) {
+            clearInterval(window.heroCarouselInterval);
+        }
+        let currentSlideIndex = 0;
+
+        function showSlide(index) {
+            const container = document.getElementById('heroGamesCarousel');
+            if (!container) return;
+            const track = container.querySelector('.cartrk');
+            const slides = container.querySelectorAll('.carsld');
+            if (slides.length === 0) return;
+
+            if (index >= slides.length) {
+                currentSlideIndex = 0;
+            } else if (index < 0) {
+                currentSlideIndex = slides.length - 1;
+            } else {
+                currentSlideIndex = index;
+            }
+
+            const translation = -currentSlideIndex * 100;
+            track.style.transform = "translateX(" + translation + "%)";
+        }
+
+        function startInterval() {
+            if (window.heroCarouselInterval) {
+                clearInterval(window.heroCarouselInterval);
+            }
+            window.heroCarouselInterval = setInterval(() => {
+                showSlide(currentSlideIndex + 1);
+            }, 5000);
+        }
+
+        window.moveCarousel = function(direction, event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            if (window.heroCarouselInterval) {
+                clearInterval(window.heroCarouselInterval);
+            }
+            window.heroCarouselInterval = setInterval(() => {
+                showSlide(currentSlideIndex + 1);
+            }, 5000);
+            showSlide(currentSlideIndex + direction);
+        };
+
+        showSlide(0);
+        startInterval();
+
+        const carouselContainer = document.getElementById('heroGamesCarousel');
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', () => {
+                if (window.heroCarouselInterval) {
+                    clearInterval(window.heroCarouselInterval);
+                }
+            });
+            carouselContainer.addEventListener('mouseleave', () => {
+                startInterval();
+            });
+        }
+    })();
+</script>

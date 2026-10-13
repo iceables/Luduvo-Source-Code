@@ -1,0 +1,49 @@
+<div id="crt-game" class="settabcntnt{{if eq .ActiveType "game"}} active{{end}}">
+    <div class="setcrd">
+        <h3 class="setttl">Create Game</h3>
+        <span class="setinf">Set up a new game for players to discover and play</span>
+        <form class="crtformel" onsubmit="return window.submitGame(event)">
+            <div class="crtfld">
+                <label class="crtlbl" for="crtGameName">Name</label>
+                <div class="instk">
+                    <div class="instkrw">
+                        <div class="ttpcnt">
+                            <div class="setinbox">
+                                <input type="text" id="crtGameName" name="name" class="setin" placeholder="Name your game" required maxlength="60" autocomplete="off">
+                            </div>
+                            <span class="ttptxt">Maximum of 60 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="crtfld">
+                <label class="crtlbl" for="crtGameDesc">Description</label>
+                <div class="instk">
+                    <div class="instkrw">
+                        <div class="ttpcnt">
+                            <div class="setareabox">
+                                <textarea id="crtGameDesc" name="description" class="setarea" placeholder="Tell us about your game" maxlength="1000"></textarea>
+                            </div>
+                            <span class="ttptxt">Maximum of 1000 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="crtfld">
+                <label class="crtlbl" for="crtGameFile">Thumbnail</label>
+                <div class="ttpcnt">
+                    <label class="crtupload" for="crtGameFile">
+                        <input type="file" id="crtGameFile" name="file" accept="image/png,image/jpeg" onchange="window.handleGameFile(event)" hidden>
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span class="crtupmsg" id="crtGameFileMsg">Choose a thumbnail image</span>
+                        <span class="crtupname" id="crtGameFileName"></span>
+                    </label>
+                    <span class="ttptxt">PNG or JPEG</span>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm">
+                <span>Create Game</span>
+            </button>
+        </form>
+    </div>
+</div>

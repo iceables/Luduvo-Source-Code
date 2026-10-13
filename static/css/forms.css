@@ -1,0 +1,421 @@
+.frmlay {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background: transparent;
+    color: #333333;
+    border-radius: 0 0 6px 6px;
+    box-sizing: border-box;
+    min-height: 500px;
+    flex-grow: 1;
+}
+
+.frmmain {
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.frmsbar {
+    width: 320px;
+    padding: 40px;
+    border-left: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    background: rgba(250, 250, 250, 0.6);
+    border-radius: 0 0 6px 0;
+}
+
+.frmsbar.regsbar {
+    width: 472px;
+    padding: 36px 0 0 0;
+    margin: 0;
+    background: transparent;
+    border-left: none;
+    border-radius: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.regartwrap {
+    position: relative;
+    width: 472px;
+    height: 455px;
+    max-width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.regartbox {
+    position: relative;
+    width: 472px;
+    height: 455px;
+    max-width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.regartbox:hover {
+    transform: scale(1.03);
+}
+
+.regartbox:active {
+    transform: scale(0.98) rotateX(-15deg);
+    transition: transform 0.08s ease;
+}
+
+.regarttxt {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transform: rotate(-7deg);
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #FFFFFF;
+    background: var(--accent, #7423CB);
+    padding: 8px 18px;
+    border-radius: 6px;
+    box-shadow: none;
+    user-select: none;
+    z-index: 3;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.regarttxt strong {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.regartimg {
+    position: relative;
+    z-index: 2;
+    width: 472px;
+    height: 455px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.regartwrap .ttptxt {
+    bottom: auto;
+    top: calc(100% + 8px);
+    transform-origin: top center;
+    transform: translateX(-50%) translateY(-5px) scale(0.8);
+}
+
+.regartwrap .ttptxt::after {
+    top: auto;
+    bottom: 100%;
+    border-color: transparent transparent #2b2b2b transparent;
+}
+
+.regartwrap .ttpcnt:hover .ttptxt {
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.frmttl {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--accent, #912ADF);
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.frmgrp {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.frmincnt {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+}
+
+.frmincnt i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888888;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+input[type="text"]:not(.input),
+input[type="password"],
+input[type="email"],
+.frmin {
+    width: 100%;
+    height: 36px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding-left: 38px;
+    padding-right: 12px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    color: #333333;
+    box-sizing: border-box;
+    outline: none;
+}
+
+input[type="text"]:not(.input)::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+.frmin::placeholder {
+    color: #888888;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+input[type="text"]:not(.input):focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+.frmin:focus {
+    border-color: var(--accent, #912ADF);
+}
+
+input[type="text"]:not(.input).inerr,
+input[type="password"].inerr,
+input[type="email"].inerr,
+.frmin.inerr {
+    border-color: #ff3b30;
+}
+
+input[type="text"]:not(.input).inerr:focus,
+input[type="password"].inerr:focus,
+input[type="email"].inerr:focus,
+.frmin.inerr:focus {
+    border-color: #ff3b30;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #333333 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.frmhlp {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 11px;
+    color: #888888;
+    margin-top: 0;
+    margin-left: 2px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.2s ease, margin-top 0.2s ease;
+}
+
+.frmgrp:focus-within .frmhlp {
+    opacity: 1;
+    max-height: 20px;
+    margin-top: 4px;
+    transform: translateY(0);
+}
+
+.frminerr {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 11px;
+    color: #ff3b30;
+    margin-top: 0;
+    margin-left: 2px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.2s ease, margin-top 0.2s ease;
+}
+
+.frminerr.visible {
+    opacity: 1;
+    max-height: 40px;
+    margin-top: 4px;
+    transform: translateY(0);
+}
+
+.frmchkgrp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    user-select: none;
+    cursor: pointer;
+}
+
+input[type="checkbox"],
+.frmchkgrp input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #ffffff;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+input[type="checkbox"]:hover,
+.frmchkgrp input:hover {
+    border-color: var(--accent, #912ADF);
+    box-shadow: none;
+    outline: none;
+}
+
+input[type="checkbox"]:focus,
+.frmchkgrp input:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+input[type="checkbox"]:active,
+.frmchkgrp input:active {
+    transform: scale(0.9);
+}
+
+input[type="checkbox"]:checked,
+.frmchkgrp input:checked {
+    background-color: var(--accent, #912ADF);
+    border-color: var(--accent, #912ADF);
+    transform: scale(1.1);
+}
+
+input[type="checkbox"]:checked::after,
+.frmchkgrp input:checked::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-0.5px, -1px) scale(0);
+    animation: checkmark-bounce 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards;
+}
+
+@keyframes checkmark-bounce {
+    to {
+        transform: rotate(45deg) translate(-0.5px, -1px) scale(1);
+    }
+}
+
+.frmchkgrp span {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    color: #555555;
+}
+
+.frmchkgrp a {
+    color: var(--accent, #912ADF);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.frmchkgrp a:hover {
+    text-decoration: underline;
+}
+
+.frmsbarsec {
+    margin-bottom: 24px;
+}
+
+.frmsbarttl {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--accent, #912ADF);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.frmsbarlst {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.frmsbarlst li {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    color: #444444;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.frmsbarlnk {
+    color: var(--accent, #912ADF);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.frmsbarlnk:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .frmlay {
+        flex-direction: column;
+    }
+    .frmsbar {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #e0e0e0;
+        border-radius: 0 0 6px 6px;
+    }
+    .frmmain, .frmsbar {
+        padding: 24px;
+    }
+    .frmsbar.regsbar {
+        width: 100%;
+        padding: 16px 0 0 0;
+        margin: 0;
+        border-top: none;
+        background: transparent;
+    }
+    .regartwrap {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        margin: 0;
+    }
+    .regartbox {
+        width: 100%;
+        height: auto;
+    }
+    .regartimg {
+        width: 100%;
+        max-width: 472px;
+        height: auto;
+    }
+    .regarttxt {
+        font-size: 16px;
+        top: 10px;
+        left: 10px;
+        transform: rotate(-5deg);
+    }
+}

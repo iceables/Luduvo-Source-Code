@@ -1,0 +1,80 @@
+<div id="tab-account" class="settabcntnt{{if eq .ActiveTab "account"}} active{{end}}">
+    <div class="setcrd">
+        <h3 class="setttl">Change Display Name</h3>
+        <span class="setinf">Your current display name is <strong id="curDisplayNameText">{{.CurDisplayName}}</strong>.</span>
+        <form action="/settings/displayname" method="POST" hx-boost="false" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="instk">
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="text" name="displayname" class="setin" placeholder="New Display Name" required autocomplete="off">
+                        </div>
+                        <span class="ttptxt">3-30 characters. Max 3 times every 7 days.</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm" style="align-self: flex-start;">
+                <span>Change Display Name</span>
+            </button>
+        </form>
+
+        <div style="height: 1px; background: #e0e0e0; margin: 24px 0;"></div>
+
+        <h3 class="setttl">Change Username</h3>
+        <span class="setinf">Your current username is <strong>{{.CurUsername}}</strong>.</span>
+        <form action="/settings/username" method="POST" id="changeUsernameForm" hx-boost="false" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="instk">
+                <div class="instkrw unrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="text" name="username" class="setin" placeholder="New Username" required autocomplete="off">
+                        </div>
+                        <span class="ttptxt">Costs 100 Vertices! Max twice every 3 days.</span>
+                    </div>
+                    <div class="unhlp">
+                        <img src="/static/useful/icons/verticec.png" alt="">
+                        <span>Costs 100 Vertices!</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm" style="align-self: flex-start;">
+                <span>Change Username</span>
+            </button>
+        </form>
+
+        <div style="height: 1px; background: #e0e0e0; margin: 24px 0;"></div>
+
+        <h3 class="setttl">Change Password</h3>
+        <form action="/settings/password" method="POST" hx-boost="false" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="instk">
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="password" name="current_password" class="setin" placeholder="Current Password" required>
+                        </div>
+                        <span class="ttptxt">Who be ye?</span>
+                    </div>
+                </div>
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="password" name="new_password" class="setin" placeholder="New Password" required>
+                        </div>
+                        <span class="ttptxt">Minimum 8 characters</span>
+                    </div>
+                </div>
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="password" name="retype_password" class="setin" placeholder="Retype New Password" required>
+                        </div>
+                        <span class="ttptxt">Must match input above</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm" style="align-self: flex-start;">
+                <span>Change Password</span>
+            </button>
+        </form>
+    </div>
+</div>

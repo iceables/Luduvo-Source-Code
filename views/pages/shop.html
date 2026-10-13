@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/avt.css">
+<link rel="stylesheet" href="/static/css/frn.css">
+<link rel="stylesheet" href="/static/css/create.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<link rel="stylesheet" href="/static/css/shop.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Shop</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search items" id="shopBarSearch" value="{{.Filter.Search}}" autocomplete="off">
+            </div>
+            <div class="barbtns">
+                <a href="/create?type=shop" hx-get="/create?type=shop" hx-target="body" hx-push-url="true" class="button barbtn" style="text-decoration: none;">Create</a>
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="shp-lay">
+                <div class="shp-hdr-block">
+                    <h1 class="shp-heading">Avatar Store</h1>
+                    <span class="shp-subheading">be sigma and buy some items, i wanted to put something betteer here but i forgot</span>
+                </div>
+
+                <div class="shp-body">
+                    <div class="shp-sidebar">
+                        <div class="shp-fltrcard" id="shpCatCard">
+                            <button type="button" class="shp-fltrhdr" onclick="window.toggleShopCategoryCard()" title="Toggle categories">
+                                <i class="fa-solid fa-shapes shp-fltrhdr-ico"></i>
+                                <span class="shp-fltrhdr-txt">Categories</span>
+                            </button>
+                            <div class="shp-fltrbody" id="shpCatBody">
+                                <div class="shp-cat-list">
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "all"}} active{{end}}" data-cat="all" onclick="window.switchShopCategoryTab('all', event)">
+                                        <i class="fa-solid fa-shapes"></i>
+                                        <span>All Items</span>
+                                    </button>
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "hat"}} active{{end}}" data-cat="hat" onclick="window.switchShopCategoryTab('hat', event)">
+                                        <i class="fa-solid fa-hat-cowboy"></i>
+                                        <span>Hats</span>
+                                    </button>
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "faces"}} active{{end}}" data-cat="faces" onclick="window.switchShopCategoryTab('faces', event)">
+                                        <i class="fa-solid fa-face-smile"></i>
+                                        <span>Faces</span>
+                                    </button>
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "shirts"}} active{{end}}" data-cat="shirts" onclick="window.switchShopCategoryTab('shirts', event)">
+                                        <i class="fa-solid fa-shirt"></i>
+                                        <span>Shirts</span>
+                                    </button>
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "tshirts"}} active{{end}}" data-cat="tshirts" onclick="window.switchShopCategoryTab('tshirts', event)">
+                                        <i class="fa-solid fa-vest"></i>
+                                        <span>T-Shirts</span>
+                                    </button>
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "pants"}} active{{end}}" data-cat="pants" onclick="window.switchShopCategoryTab('pants', event)">
+                                        <i><svg class="shp-pantsico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path fill="currentColor" d="M154.9 96.4C158.5 77.6 175 64 194.2 64L446.7 64C465.9 64 482.4 77.6 486 96.4L494.7 141.8L495.1 143.9L440.4 143.9C427.1 143.9 416.4 154.6 416.4 167.9C416.4 181.2 427.1 191.9 440.4 191.9L504.3 191.9L567.1 518.5C571.3 540.2 557.1 561.2 535.4 565.3L425.4 586.5C403.7 590.7 382.7 576.5 378.6 554.8L321.3 256.7C321.2 256.3 320.9 256 320.5 256C320.1 256 319.7 256.3 319.7 256.7L262.3 554.8C258.1 576.5 237.2 590.7 215.5 586.5L105.5 565.3C83.8 561.1 69.6 540.2 73.8 518.5L136.6 191.9L200.5 191.9C213.8 191.9 224.5 181.2 224.5 167.9C224.5 154.6 213.8 143.9 200.5 143.9L145.8 143.9L146.2 141.8L154.9 96.4z"/></svg></i>
+                                        <span>Pants</span>
+                                    </button>
+                                    <button type="button" class="shp-cat-item{{if eq .ActiveCat "gear"}} active{{end}}" data-cat="gear" onclick="window.switchShopCategoryTab('gear', event)">
+                                        <i class="fa-solid fa-wrench"></i>
+                                        <span>Gear</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{template "components/shop/filter" .}}
+                    </div>
+
+                    <div class="shp-main">
+                        <div class="shp-main-top">
+                            <div class="setinbox shp-main-search">
+                                <input type="text" id="shopSearchInput" class="setin shp-fltrin" placeholder="Search items..." value="{{.Filter.Search}}" autocomplete="off">
+                            </div>
+                            <a href="/create?type=shop" hx-get="/create?type=shop" hx-target="body" hx-push-url="true" class="crttypebtn shp-create-tabbtn">
+                                <i class="fa-solid fa-plus"></i> Create
+                            </a>
+                        </div>
+
+                        {{template "components/shop/grid" .}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/elements/modal.js"></script>
+<script src="/static/js/shop/shop.js"></script>

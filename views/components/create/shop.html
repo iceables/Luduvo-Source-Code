@@ -1,0 +1,111 @@
+<div id="crt-shop" class="settabcntnt{{if eq .ActiveType "shop"}} active{{end}}">
+    <div class="tabcnt settabcnt crtshoptabs">
+        <div class="tablst">
+            <div class="tabind"></div>
+            <button type="button" class="tabbtn{{if eq .ActiveCat "hat"}} active{{end}}" data-cat="hat" onclick="window.switchShopCategory('hat', event)">Hat</button>
+            <button type="button" class="tabbtn{{if eq .ActiveCat "face"}} active{{end}}" data-cat="face" onclick="window.switchShopCategory('face', event)">Face</button>
+            <button type="button" class="tabbtn{{if eq .ActiveCat "shirt"}} active{{end}}" data-cat="shirt" onclick="window.switchShopCategory('shirt', event)">Shirt</button>
+            <button type="button" class="tabbtn{{if eq .ActiveCat "tshirt"}} active{{end}}" data-cat="tshirt" onclick="window.switchShopCategory('tshirt', event)">T-Shirt</button>
+            <button type="button" class="tabbtn{{if eq .ActiveCat "pants"}} active{{end}}" data-cat="pants" onclick="window.switchShopCategory('pants', event)">Pants</button>
+            <button type="button" class="tabbtn{{if eq .ActiveCat "tool"}} active{{end}}" data-cat="tool" onclick="window.switchShopCategory('tool', event)">Tool</button>
+        </div>
+    </div>
+
+    <div class="crtform">
+        <div class="crtforml">
+            <div class="setcrd">
+                <h3 class="setttl" id="crtShopTitle">Create {{.ActiveCatName}}</h3>
+                <span class="setinf">Publish a new <strong id="crtShopCatName">{{.ActiveCatName}}</strong> to the Buildoverse shop</span>
+                <form class="crtformel" onsubmit="return window.submitShopItem(event)">
+                    <input type="hidden" id="crtShopCatInput" name="category" value="{{.ActiveCat}}">
+                    <input type="hidden" id="crtShopModelTransform" name="transform" value="">
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtShopName">Name</label>
+                        <div class="instk">
+                            <div class="instkrw">
+                                <div class="ttpcnt">
+                                    <div class="setinbox">
+                                        <input type="text" id="crtShopName" name="name" class="setin" placeholder="Name your item" required maxlength="60" autocomplete="off" oninput="window.updateShopPreviewName()">
+                                    </div>
+                                    <span class="ttptxt">Maximum of 60 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtShopDesc">Description</label>
+                        <div class="instk">
+                            <div class="instkrw">
+                                <div class="ttpcnt">
+                                    <div class="setareabox">
+                                        <textarea id="crtShopDesc" name="description" class="setarea" placeholder="Tell us about your item" maxlength="500"></textarea>
+                                    </div>
+                                    <span class="ttptxt">Maximum of 500 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtShopPrice">Price</label>
+                        <div class="instk">
+                            <div class="instkrw">
+                                <div class="ttpcnt">
+                                    <div class="setinbox">
+                                        <input type="number" id="crtShopPrice" name="price" class="setin crtprice" placeholder="0" min="0" max="1000000" required>
+                                        <img src="/static/useful/icons/verticec.png" class="crtpriceico" alt="Vertices">
+                                    </div>
+                                    <span class="ttptxt">Set your price in Vertices</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtShopFile">Asset File</label>
+                        <div class="ttpcnt">
+                            <label class="crtupload" for="crtShopFile">
+                                <input type="file" id="crtShopFile" name="file" accept="image/png,image/jpeg" onchange="window.handleShopFile(event)" hidden>
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <span class="crtupmsg" id="crtShopFileMsg">Choose a PNG or JPEG</span>
+                                <span class="crtupname" id="crtShopFileName"></span>
+                            </label>
+                            <span class="ttptxt">PNG or JPEG</span>
+                        </div>
+                    </div>
+                    <div class="crtfld crt3dfld{{if or (eq .ActiveCat "hat") (eq .ActiveCat "face") (eq .ActiveCat "tool")}} visible{{end}}" id="crtShopModelFld">
+                        <label class="crtlbl" for="crtShopModelFile">3D Model</label>
+                        <div class="ttpcnt">
+                            <label class="crtupload" for="crtShopModelFile">
+                                <input type="file" id="crtShopModelFile" name="model" accept=".glb,.obj" onchange="window.handleShopModelFile(event)" hidden>
+                                <i class="fa-solid fa-cube"></i>
+                                <span class="crtupmsg" id="crtShopModelMsg">Choose a GLB or OBJ</span>
+                                <span class="crtupname" id="crtShopModelName"></span>
+                            </label>
+                            <span class="ttptxt">GLB or OBJ</span>
+                        </div>
+                        <button type="button" class="primary hpyprim hpyinl hpysm crt3dbtn" id="crtShopModelViewBtn" onclick="window.openCreate3DPreview()" disabled>
+                            <span>Preview in 3D</span>
+                        </button>
+                    </div>
+                    <button type="submit" class="primary hpyprim hpyinl hpysm">
+                        <span>Create Item</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="crtformr">
+            <div class="setcrd crtprevcrd">
+                <h3 class="setttl">Preview</h3>
+                <span class="setinf">How your item will appear in the shop</span>
+                <div class="avtitm" id="crtShopPreview">
+                    <div class="avtitmimg">
+                        <img src="/static/useful/temp/pfp.png" alt="" class="avtldimg" id="crtShopPreviewImg" onerror="this.src='/static/useful/temp/pfp.png';">
+                    </div>
+                    <div class="avtitmmeta">
+                        <span class="avtitmnm" id="crtShopPreviewName">Untitled {{.ActiveCatName}}</span>
+                        <span class="avtitmcr">by {{.Username}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

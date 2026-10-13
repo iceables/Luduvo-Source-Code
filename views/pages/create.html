@@ -1,0 +1,143 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/avt.css">
+<link rel="stylesheet" href="/static/css/shop.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<link rel="stylesheet" href="/static/css/create.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Create</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search" autocomplete="off">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane" data-can-image="{{.CanUploadImage}}" data-can-mesh-sound="{{.CanUploadMeshSound}}" data-can-clothing="{{.CanUploadClothing}}" data-can-accessories="{{.CanUploadAccessories}}" data-account-days="{{.AccountAgeDays}}">
+            <div class="frmlay">
+                <div class="frmmain" style="padding-top: 24px !important;">
+                    <div class="crttype">
+                        <button type="button" class="crttypebtn{{if eq .ActiveType "game"}} active{{end}}" data-type="game" onclick="window.switchCreateType('game', event)">
+                            <img src="/static/useful/icons/gm.png" alt="">
+                            Game
+                        </button>
+                        <button type="button" class="crttypebtn{{if eq .ActiveType "shop"}} active{{end}}" data-type="shop" onclick="window.switchCreateType('shop', event)">
+                            <img src="/static/useful/icons/item.png" alt="">
+                            Shop Item
+                        </button>
+                        <button type="button" class="crttypebtn{{if eq .ActiveType "asset"}} active{{end}}" data-type="asset" onclick="window.switchCreateType('asset', event)">
+                            <img src="/static/useful/icons/gma.png" alt="">
+                            Asset
+                        </button>
+                    </div>
+                    <div class="settabvwp crtvwp">
+                        {{template "components/create/game" .}}
+                        {{template "components/create/shop" .}}
+                        {{template "components/create/asset" .}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="movl" id="crt3dModal">
+    <div class="mcard crt3dmodal" onclick="event.stopPropagation()">
+        <div class="mhdr">
+            <h3 class="mtitle">3D Preview</h3>
+            <p class="msub">Position your model on your avatar</p>
+            <button type="button" class="mclose" onclick="window.closeCreate3DPreview()" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="crt3dbody">
+            <div class="crt3dview" id="crt3dView"></div>
+            <div class="crt3dhint">
+                <i class="fa-solid fa-hand-pointer"></i>
+                <span>Drag the model to move it,</span>
+                <span>drag the background to rotate and</span>
+                <span>Scroll to zoom</span>
+            </div>
+            <div class="crt3dtf">
+                <div class="crt3dtfsec">
+                    <span class="crt3dtflbl">Snap to</span>
+                    <div class="crt3dtfrw">
+                        <select class="crt3dsnap" id="crt3dSnap" onchange="window.setCreateSnap()">
+                            <option value="none">No Snap</option>
+                            <optgroup label="Head">
+                                <option value="head-top">Head (Top)</option>
+                                <option value="head-front">Head (Front)</option>
+                            </optgroup>
+                            <optgroup label="Torso">
+                                <option value="torso-top">Torso (Top)</option>
+                                <option value="torso-front">Torso (Front)</option>
+                            </optgroup>
+                            <optgroup label="Left Arm">
+                                <option value="larm-top">Left Arm (Top)</option>
+                                <option value="larm-hand">Left Arm (Hand)</option>
+                            </optgroup>
+                            <optgroup label="Right Arm">
+                                <option value="rarm-top">Right Arm (Top)</option>
+                                <option value="rarm-hand">Right Arm (Hand)</option>
+                            </optgroup>
+                            <optgroup label="Left Leg">
+                                <option value="lleg-top">Left Leg (Top)</option>
+                                <option value="lleg-foot">Left Leg (Foot)</option>
+                            </optgroup>
+                            <optgroup label="Right Leg">
+                                <option value="rleg-top">Right Leg (Top)</option>
+                                <option value="rleg-foot">Right Leg (Foot)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="crt3dtfsec">
+                    <span class="crt3dtflbl">Move</span>
+                    <div class="crt3dtfrw">
+                        <label class="crt3daxlbl" for="crt3dPosX">X</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dPosX" step="0.05" value="0" oninput="window.applyCreateTransform()"></div>
+                        <label class="crt3daxlbl" for="crt3dPosY">Y</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dPosY" step="0.05" value="0" oninput="window.applyCreateTransform()"></div>
+                        <label class="crt3daxlbl" for="crt3dPosZ">Z</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dPosZ" step="0.05" value="0" oninput="window.applyCreateTransform()"></div>
+                    </div>
+                </div>
+                <div class="crt3dtfsec">
+                    <span class="crt3dtflbl">Rotate</span>
+                    <div class="crt3dtfrw">
+                        <label class="crt3daxlbl" for="crt3dRotX">X</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dRotX" step="5" value="0" oninput="window.applyCreateTransform()"></div>
+                        <label class="crt3daxlbl" for="crt3dRotY">Y</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dRotY" step="5" value="0" oninput="window.applyCreateTransform()"></div>
+                        <label class="crt3daxlbl" for="crt3dRotZ">Z</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dRotZ" step="5" value="0" oninput="window.applyCreateTransform()"></div>
+                    </div>
+                </div>
+                <div class="crt3dtfsec">
+                    <span class="crt3dtflbl">Size</span>
+                    <div class="crt3dtfrw">
+                        <label class="crt3daxlbl" for="crt3dScaleX">X</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dScaleX" step="0.05" min="0.05" value="1" oninput="window.applyCreateTransform()"></div>
+                        <label class="crt3daxlbl" for="crt3dScaleY">Y</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dScaleY" step="0.05" min="0.05" value="1" oninput="window.applyCreateTransform()"></div>
+                        <label class="crt3daxlbl" for="crt3dScaleZ">Z</label>
+                        <div class="setinbox crt3daxbox"><input type="number" class="setin crt3dax" id="crt3dScaleZ" step="0.05" min="0.05" value="1" oninput="window.applyCreateTransform()"></div>
+                    </div>
+                    <button type="button" class="primary hpyinf hpyinl hpysm crt3dreset" onclick="window.resetCreateTransform()">
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/elements/modal.js"></script>
+<script src="/static/js/create/create.js"></script>
+<script type="module" src="/static/js/create/create3d.js"></script>

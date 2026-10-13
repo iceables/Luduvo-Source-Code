@@ -1,0 +1,109 @@
+<div id="crt-asset" class="settabcntnt{{if eq .ActiveType "asset"}} active{{end}}">
+    <div class="tabcnt settabcnt crtassettabs">
+        <div class="tablst">
+            <div class="tabind"></div>
+            <button type="button" class="tabbtn{{if eq .ActiveAssetType "image"}} active{{end}}" data-assettype="image" onclick="window.switchAssetCategory('image', event)">Image</button>
+            <button type="button" class="tabbtn{{if eq .ActiveAssetType "mesh"}} active{{end}}" data-assettype="mesh" onclick="window.switchAssetCategory('mesh', event)">Mesh</button>
+            <button type="button" class="tabbtn{{if eq .ActiveAssetType "sound"}} active{{end}}" data-assettype="sound" onclick="window.switchAssetCategory('sound', event)">Sound</button>
+        </div>
+    </div>
+
+    <div class="crtform">
+        <div class="crtforml">
+            <div class="setcrd">
+                <h3 class="setttl" id="crtAssetTitle">Create {{if eq .ActiveAssetType "mesh"}}Mesh{{else if eq .ActiveAssetType "sound"}}Sound{{else}}Image{{end}}</h3>
+                <span class="setinf">Upload a reusable asset for games and creation</span>
+                <form class="crtformel" onsubmit="return window.submitAsset(event)">
+                    <input type="hidden" id="crtAssetTypeInput" name="type" value="{{.ActiveAssetType}}">
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtAssetName">Name</label>
+                        <div class="instk">
+                            <div class="instkrw">
+                                <div class="ttpcnt">
+                                    <div class="setinbox">
+                                        <input type="text" id="crtAssetName" name="name" class="setin" placeholder="Name your asset" required maxlength="60" autocomplete="off" oninput="window.updateAssetPreviewName()">
+                                    </div>
+                                    <span class="ttptxt">Maximum of 60 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtAssetDesc">Description</label>
+                        <div class="instk">
+                            <div class="instkrw">
+                                <div class="ttpcnt">
+                                    <div class="setareabox">
+                                        <textarea id="crtAssetDesc" name="description" class="setarea" placeholder="Tell us what this asset is for" maxlength="500"></textarea>
+                                    </div>
+                                    <span class="ttptxt">Maximum of 500 characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crtfld">
+                        <label class="crtlbl" for="crtAssetFile" id="crtAssetFileLabel">Asset File</label>
+                        <div class="ttpcnt">
+                            <label class="crtupload" for="crtAssetFile">
+                                <input type="file" id="crtAssetFile" name="file" accept="image/png,image/jpeg,image/webp,image/gif" onchange="window.handleAssetFile(event)" hidden>
+                                <i class="fa-solid fa-cloud-arrow-up" id="crtAssetUploadIcon"></i>
+                                <span class="crtupmsg" id="crtAssetFileMsg">Choose a PNG, JPG, WEBP or GIF</span>
+                                <span class="crtupname" id="crtAssetFileName"></span>
+                            </label>
+                            <span class="ttptxt" id="crtAssetFileTip">PNG, JPG, WEBP, GIF</span>
+                        </div>
+                    </div>
+                    <div class="crtfld" id="crtAssetTextureFld" style="display: {{if eq .ActiveAssetType "mesh"}}flex{{else}}none{{end}};">
+                        <label class="crtlbl" for="crtAssetTextureFile">Texture (Optional)</label>
+                        <div class="ttpcnt">
+                            <label class="crtupload" for="crtAssetTextureFile">
+                                <input type="file" id="crtAssetTextureFile" name="texture" accept="image/png,image/jpeg,image/webp,image/gif" onchange="window.handleAssetTextureFile(event)" hidden>
+                                <i class="fa-solid fa-image"></i>
+                                <span class="crtupmsg" id="crtAssetTextureMsg">Choose a PNG or JPEG texture</span>
+                                <span class="crtupname" id="crtAssetTextureName"></span>
+                            </label>
+                            <span class="ttptxt">PNG, JPG, WEBP, GIF</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center; margin-top: 4px; flex-wrap: wrap;">
+                        <button type="submit" class="primary hpyprim hpyinl hpysm" id="crtAssetSubmitBtn">
+                            <span>Upload Asset</span>
+                        </button>
+                        <a href="/create/assets" hx-get="/create/assets" hx-target="body" hx-push-url="true" class="primary hpyinf hpyinl hpysm" style="text-decoration: none;">
+                            <span>My Assets</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="crtformr">
+            <div class="setcrd crtprevcrd">
+                <h3 class="setttl">Preview</h3>
+                <span class="setinf">How your asset will appear in the catalogue</span>
+                <div class="shp-card" id="crtAssetPreviewCard">
+                    <div class="avtitmimg" id="crtAssetImgWrap">
+                        <img src="/static/useful/temp/pfp.png" alt="" class="avtldimg" id="crtAssetPreviewImg" onerror="this.src='/static/useful/temp/pfp.png';">
+                        <i class="fa-solid fa-music" id="crtAssetPreviewAudioIcon" style="display: none; font-size: 40px; color: #C1C1C1;"></i>
+                        <i class="fa-solid fa-cube" id="crtAssetPreviewMeshIcon" style="display: none; font-size: 40px; color: #C1C1C1;"></i>
+                        <span class="avtitmbdg adm-badge-image" id="crtAssetPreviewBadge">Image</span>
+                    </div>
+                    <div class="avtitmmeta">
+                        <span class="avtitmnm" id="crtAssetPreviewName">Untitled Image</span>
+                        <span class="avtitmcr" id="crtAssetPreviewType">Image Asset</span>
+                    </div>
+                </div>
+
+                <div class="crtassetmeta" style="margin-top: 16px;">
+                    <div class="crtassetrow">
+                        <span>Formats</span>
+                        <strong id="crtAssetFormats">PNG, JPG, WEBP, GIF</strong>
+                    </div>
+                    <div class="crtassetrow">
+                        <span>Max size</span>
+                        <strong id="crtAssetLimit">Up to 8 MB</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

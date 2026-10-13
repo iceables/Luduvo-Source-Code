@@ -1,0 +1,54 @@
+{{if .IsLoggedIn}}
+<link rel="stylesheet" href="/static/css/dash.css">
+{{else}}
+<link rel="stylesheet" href="/static/css/land.css">
+{{end}}
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            {{if .IsLoggedIn}}
+            <span class="title">Home</span>
+            {{else}}
+            <span class="title">Landing</span>
+            {{end}}
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            {{if .IsLoggedIn}}
+            <button hx-get="/profile" hx-target="body" hx-push-url="true" class="button generic">Profile</button>
+            {{else}}
+            <button hx-get="/login" hx-target="body" hx-push-url="true" class="button generic">Login</button>
+            {{end}}
+        </div>
+        <div class="pane">
+            {{if .IsLoggedIn}}
+            <div class="feedpg">
+                <div class="dashlay">
+                    <div class="dashl">
+                        {{template "components/dashboard/sidebar" .}}
+                    </div>
+                    <div class="dashr">
+                        {{if .SignupMessage}}
+                        <div class="setcrd" style="margin-bottom:12px;padding:12px 14px">
+                            <strong>{{.Greeting}}</strong>
+                            <p>{{.SignupMessage}}</p>
+                            <a href="/avatar" hx-get="/avatar" hx-target="body" hx-push-url="true">Open avatar editor</a>
+                        </div>
+                        {{else if .Greeting}}
+                        <p class="msub">{{.Greeting}}</p>
+                        {{end}}
+                        {{if .Games}}
+                        {{template "components/dashboard/games" .}}
+                        {{end}}
+                        {{template "components/dashboard/feed" .}}
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            {{template "components/landing/landing" .}}
+            {{end}}
+        </div>
+    </div>
+</div>

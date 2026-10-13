@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/shop.css">
+<style>
+.store-wrap{display:flex;flex-direction:column;gap:28px;padding:8px 4px 32px}
+.store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.store-card,.plan-card{background:var(--card,#1c1c1c);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.store-card img,.plan-card .preview{width:100%;aspect-ratio:16/10;object-fit:contain;background:#111}
+.store-card .meta,.plan-body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.perk{font-size:13px;opacity:.9}
+.store-msg{padding:10px 12px;border-radius:8px;background:#14301c;color:#d8ffe4}
+.interval-row{display:flex;gap:8px;align-items:center}
+.price{font-weight:700}
+</style>
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Store</span>
+            <div class="barbtns">
+                <a class="button barbtn" href="/upgrade?interval=monthly">Monthly</a>
+                <a class="button barbtn" href="/upgrade?interval=yearly">Yearly</a>
+            </div>
+        </div>
+        <div class="pane">
+            <main class="store-wrap" aria-labelledby="store-title">
+                <h1 id="store-title" class="sr-only">Store</h1>
+                {{if .Message}}<p class="store-msg">{{.Message}}</p>{{end}}
+                <p>Buy Lunes and manage your subscriptions.</p>
+                <section>
+                    <h2>Lune Packs</h2>
+                    <div class="store-grid">
+                        {{range .Packs}}
+                        <article class="store-card">
+                            <img src="/static/images/store/base.webp" alt="{{.Lunes}} Lunes">
+                            <div class="meta">
+                                <h3>{{.Lunes}} Lunes</h3>
+                                {{if .Bonus}}<p class="perk">+{{.Bonus}} bonus</p>{{end}}
+                                <p class="price">{{.Price}}</p>
+                                <form method="POST" action="/upgrade/checkout">
+                                    <input type="hidden" name="sku" value="{{.SKU}}">
+                                    <button class="primary hpyprim hpyinl hpysm" type="submit"><span>Buy</span></button>
+                                </form>
+                            </div>
+                        </article>
+                        {{end}}
+                    </div>
+                </section>
+                <section id="plans">
+                    <h2 id="plans-title">Subscriptions</h2>
+                    <p class="perk">Showing {{.Interval}} prices. Your current plan: {{if .Plan}}{{.Plan}}{{else}}Free{{end}}.</p>
+                    <div class="plan-grid">
+                        <article class="plan-card">
+                            <img class="preview" src="/static/images/store/base.webp" alt="">
+                            <div class="plan-body">
+                                <h3>Free</h3>
+                                <p><span class="price">$0.00</span> <span>/month</span></p>
+                                <p>No subscription required. Free. Forever.</p>
+                                <ul>
+                                    <li class="perk">Core Buildoverse features</li>
+                                    <li class="perk">Standard account limits</li>
+                                </ul>
+                            </div>
+                        </article>
+                        {{range .Plans}}
+                        <article class="plan-card">
+                            <img class="preview" src="{{.Preview}}" alt="{{.Name}}">
+                            <div class="plan-body">
+                                <h3>{{.Name}}</h3>
+                                <p>
+                                    {{if eq $.Interval "yearly"}}
+                                    <span class="price">{{.Yearly}}</span> <span>/year</span>
+                                    {{else}}
+                                    <span class="price">{{.Monthly}}</span> <span>/month</span>
+                                    {{end}}
+                                </p>
+                                {{if .Includes}}<p>{{.Includes}}</p>{{else}}<p>{{.Blurb}}</p>{{end}}
+                                <ul>
+                                    {{range .Perks}}<li class="perk">{{.}}</li>{{end}}
+                                </ul>
+                                <img src="{{.Cosmetic}}" alt="" style="width:72px;height:72px;object-fit:contain">
+                                <form method="POST" action="/upgrade/checkout">
+                                    <input type="hidden" name="sku" value="{{.ID}}_{{$.Interval}}">
+                                    <input type="hidden" name="interval" value="{{$.Interval}}">
+                                    <button class="primary hpyprim hpyinl hpysm" type="submit">
+                                        <span>{{if eq $.Plan .ID}}Current plan{{else}}Upgrade{{end}}</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </article>
+                        {{end}}
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</div>

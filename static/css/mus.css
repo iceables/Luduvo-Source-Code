@@ -1,0 +1,374 @@
+.musform {
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.mcard .feedinbox {
+    box-sizing: border-box !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: 52px !important;
+    flex-shrink: 0 !important;
+    background: #E0E0E0 !important;
+    border: 2px solid rgba(61, 61, 61, 0.25) !important;
+    border-radius: 12px !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.mcard .feedinbox:focus-within {
+    border-color: rgba(61, 61, 61, 0.25) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.mcard .feedin,
+.mcard .feedin:focus,
+.mcard .feedin:focus-visible,
+.mcard .feedin:active {
+    box-sizing: border-box !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding-left: 16px !important;
+    padding-right: 66px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: #3D3D3D !important;
+    box-shadow: none !important;
+}
+
+.mcard .feedin::placeholder {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 22px !important;
+    color: rgba(61, 61, 61, 0.25) !important;
+}
+
+.mcard .feedsnd {
+    position: absolute !important;
+    width: 44px !important;
+    height: 44px !important;
+    right: 4px !important;
+    top: 2px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer !important;
+    transition: transform 0.2s !important;
+    color: #000000 !important;
+    opacity: 0.25 !important;
+}
+
+.mcard .feedsnd:hover {
+    transform: scale(1.1) !important;
+    opacity: 0.5 !important;
+}
+
+.muslst {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    max-height: 320px !important;
+    overflow-y: auto !important;
+    padding-right: 4px !important;
+}
+
+.musitm {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 12px !important;
+    background: #ECECEC !important;
+    border: 2px solid #C1C1C1 !important;
+    border-radius: 12px !important;
+    transition: background 0.15s ease, border-color 0.15s ease !important;
+}
+
+.musitm:hover {
+    background: #E4E4E4 !important;
+    border-color: #B0B0B0 !important;
+}
+
+.musitm.active {
+    background: #E8DCF8 !important;
+    border-color: #912ADF !important;
+}
+
+.muscvr {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 8px !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    background: #C1C1C1 !important;
+}
+
+.musinf {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+}
+
+.musttl {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #3D3D3D !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.musart {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 12px !important;
+    color: #718096 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.msempty {
+    text-align: center !important;
+    color: #718096 !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+    padding: 30px 0 !important;
+}
+
+.musftr {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 10px !important;
+    border-top: 1px solid #C1C1C1 !important;
+    flex-shrink: 0 !important;
+}
+
+.muslogo {
+    height: 22px !important;
+    width: auto !important;
+    max-width: 200px !important;
+    object-fit: contain !important;
+}
+
+.musplayer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.musplayer-container[style*="display: none"],
+.musplayer-container[style*="display:none"] {
+    display: none !important;
+}
+
+.musplayer {
+    background: #ECECEC !important;
+    border: 2px solid #C1C1C1 !important;
+    border-radius: 10px !important;
+    padding: 6px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+}
+
+.musplayer-cvr {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 4px !important;
+    object-fit: cover !important;
+    flex-shrink: 0 !important;
+    background: #C1C1C1 !important;
+}
+
+.musplayer-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1px !important;
+    width: 110px !important;
+    flex-shrink: 0 !important;
+    min-width: 0 !important;
+}
+
+.musplayer-ttl {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #3D3D3D !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+}
+
+.musplayer-art {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 10px !important;
+    color: #718096 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+}
+
+.musplayer-plybtn {
+    background: transparent !important;
+    border: none !important;
+    font-size: 13px !important;
+    color: #3D3D3D !important;
+    cursor: pointer !important;
+    opacity: 0.8 !important;
+    transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease !important;
+    padding: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.musplayer-plybtn:hover {
+    opacity: 1 !important;
+    color: #912ADF !important;
+    transform: scale(1.1) !important;
+}
+
+.musplayer-seek {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    min-width: 0 !important;
+}
+
+.musplayer-time {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #718096 !important;
+    user-select: none !important;
+    min-width: 24px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+}
+
+.musplayer-barcnt {
+    flex: 1 !important;
+    min-width: 0 !important;
+    height: 6px !important;
+    background: rgba(61, 61, 61, 0.2) !important;
+    border: 1px solid rgba(61, 61, 61, 0.1) !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.musplayer-barfill {
+    display: block !important;
+    height: 100% !important;
+    width: 0%;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #7423CB !important;
+    box-shadow: inset 0px 0px 4px rgba(255, 255, 255, 0.25) !important;
+    border-radius: 3px !important;
+    transition: width 0.1s linear !important;
+}
+
+.musplayer-volbtn {
+    background: transparent !important;
+    border: none !important;
+    font-size: 13px !important;
+    color: #3D3D3D !important;
+    cursor: pointer !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease !important;
+    padding: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.musplayer-volbtn:hover {
+    opacity: 1 !important;
+    color: #912ADF !important;
+    transform: scale(1.1) !important;
+}
+
+.musplayer-removebtn {
+    background: transparent !important;
+    border: none !important;
+    font-size: 13px !important;
+    color: #DC3545 !important;
+    cursor: pointer !important;
+    opacity: 0.75 !important;
+    transition: opacity 0.15s ease, transform 0.15s ease !important;
+    padding: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.musplayer-removebtn:hover {
+    opacity: 1 !important;
+    transform: scale(1.15) !important;
+}
+
+.musplayer-updatebtn {
+    align-self: center !important;
+    margin-top: 2px !important;
+}
+
+.musplybtn-sm {
+    background: transparent !important;
+    border: none !important;
+    font-size: 14px !important;
+    color: #3D3D3D !important;
+    cursor: pointer !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.15s ease, transform 0.15s ease, color 0.15s ease !important;
+    padding: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.musplybtn-sm:hover {
+    opacity: 1 !important;
+    color: #912ADF !important;
+    transform: scale(1.15) !important;
+}

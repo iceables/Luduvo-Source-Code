@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="/static/css/prof.css">
+<script>
+window.updateProfileTabIndicator = function() {
+    const indicator = document.querySelector('.prftabind');
+    const activeTab = document.querySelector('.prftabbtn.active');
+    if (indicator && activeTab) {
+        indicator.style.left = activeTab.offsetLeft + 'px';
+        indicator.style.width = activeTab.offsetWidth + 'px';
+        indicator.style.height = activeTab.offsetHeight + 'px';
+        indicator.style.top = activeTab.offsetTop + 'px';
+    }
+};
+
+window.switchProfileTab = function(tabName, event) {
+    if (event) {
+        event.preventDefault();
+    }
+    const tabs = Array.from(document.querySelectorAll('.prftabbtn'));
+    const clickedTab = event ? event.currentTarget : null;
+    if (!clickedTab) return;
+
+    if (clickedTab.classList.contains('active')) return;
+
+    tabs.forEach(tab => tab.classList.remove('active'));
+    clickedTab.classList.add('active');
+
+    window.updateProfileTabIndicator();
+};
+</script>
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Profile</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="prfhdr">
+                <div class="prfinf">
+                    <div class="prfavt">
+                        <img src="/api/v1/avatar/headshot/{{.ProfileUser.ID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.ProfileUser.Username}}">
+                    </div>
+                    <div class="prfmeta">
+                        <h1 class="prfdn">
+                            <span>{{.ProfileUser.DisplayName}}</span>
+                            {{if .ProfileUser.Pronouns}}<span class="prfprn">({{.ProfileUser.Pronouns}})</span>{{end}}
+                        </h1>
+                        <span class="prfun">@{{.ProfileUser.Username}}</span>
+                        <div class="prfsts">
+                            <a href="/friends/{{.ProfileUser.ID}}" hx-get="/friends/{{.ProfileUser.ID}}" hx-target="body" hx-push-url="true" class="prfst" style="text-decoration: none; color: inherit;">
+                                <strong>{{.FriendsCount}}</strong> Friends
+                            </a>
+                            <span class="prfst"><strong>{{.FollowersCount}}</strong> Followers</span>
+                            <span class="prfst"><strong>{{.FollowingCount}}</strong> Following</span>
+                        </div>
+                    </div>
+                </div>
+                {{template "components/profile/actions" .}}
+            </div>
+            <div class="prfbody">
+                <div class="prftabcnt">
+                    <div class="prftablst">
+                        <div class="prftabind"></div>
+                        <button type="button" class="prftabbtn active" onclick="window.switchProfileTab('about', event)">About</button>
+                        <button type="button" class="prftabbtn" onclick="window.switchProfileTab('games', event)">Games</button>
+                        <button type="button" class="prftabbtn" onclick="window.switchProfileTab('shop', event)">Shop</button>
+                        <button type="button" class="prftabbtn" onclick="window.switchProfileTab('clans', event)">Clans</button>
+                        <button type="button" class="prftabbtn" onclick="window.switchProfileTab('inventory', event)">Inventory</button>
+                    </div>
+                </div>
+                <div class="prfcrd">
+                    <div class="prfchrcrd" id="avatar3d" data-userid="{{.ProfileUser.ID}}"></div>
+                    <div class="prfboxes-row">
+                        <div class="prfsec">
+                            <h2 class="prfboxttl">Currently Wearing</h2>
+                            <div class="prfbox-card prfwrngbox"></div>
+                        </div>
+                        <div class="prfsec">
+                            <h2 class="prfboxttl">About</h2>
+                            <div class="prfbox-card prfabtbox">
+                                <p class="prfboxtxt">{{if .ProfileUser.Description}}{{.ProfileUser.Description}}{{else}}This user has no bio.{{end}}</p>
+                                {{if .ProfileUser.ParsedSocials}}
+                                <div class="prfscls">
+                                    {{range .ProfileUser.ParsedSocials}}
+                                    <div class="ttpcnt">
+                                        <a href="{{.URL}}" target="_blank" rel="noopener noreferrer" class="prfsclico" style="color: {{.Color}};">
+                                            <i class="{{.Icon}}"></i>
+                                        </a>
+                                        <span class="ttptxt">{{.Value}}</span>
+                                    </div>
+                                    {{end}}
+                                </div>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{if .ProfileMusicID}}
+<div id="profileMusicWidget" class="prf-music-widget" data-music-id="{{.ProfileMusicID}}">
+    <div class="musplayer">
+        <img id="prfMusCover" src="" alt="" class="musplayer-cvr">
+        <div class="musplayer-meta">
+            <span id="prfMusTitle" class="musplayer-ttl">Loading track...</span>
+            <span id="prfMusArtist" class="musplayer-art">...</span>
+        </div>
+        <button type="button" id="prfMusPlayBtn" class="musplayer-plybtn" onclick="window.toggleProfileTrack()" title="Play/Pause">
+            <i id="prfMusPlayIcon" class="fa-solid fa-play"></i>
+        </button>
+        <div class="musplayer-seek">
+            <span id="prfMusCurTime" class="musplayer-time">0:00</span>
+            <div class="musplayer-barcnt" onclick="window.seekProfileTrack(event)">
+                <div id="prfMusBarFill" class="musplayer-barfill"></div>
+            </div>
+            <span id="prfMusDurTime" class="musplayer-time">0:30</span>
+        </div>
+        <button type="button" id="prfMusVolBtn" class="musplayer-volbtn" onclick="window.toggleMuteProfileTrack()" title="Mute/Unmute">
+            <i id="prfMusVolIcon" class="fa-solid fa-volume-high"></i>
+        </button>
+    </div>
+</div>
+{{end}}
+
+<script src="/static/js/elements/music.js"></script>
+<script type="module" src="/static/js/profile/profile.js"></script>

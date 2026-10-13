@@ -1,0 +1,348 @@
+.crttype {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+    margin-left: 16px;
+    flex-wrap: wrap;
+}
+
+.crttypebtn {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 14px;
+    background: #FFFFFF;
+    color: #666666;
+    border: 2px solid rgba(61, 61, 61, 0.25);
+    border-radius: 12px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.1), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.crttypebtn:hover {
+    color: #3D3D3D;
+    transform: scale(1.03);
+}
+
+.crttypebtn:active {
+    transform: scale(0.96);
+    transition: transform 0.08s ease;
+}
+
+.crttypebtn.active {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #7423CB;
+    border: none;
+    color: #FFFFFF;
+}
+
+.crttypebtn img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(40%);
+    transition: filter 0.2s ease;
+}
+
+.crttypebtn:hover img {
+    filter: brightness(0) invert(24%);
+}
+
+.crttypebtn.active img {
+    filter: brightness(0) invert(1);
+}
+
+.crtvwp {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.crtshoptabs,
+.crtassettabs {
+    max-width: 100% !important;
+}
+
+.crtform {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.crtforml {
+    flex: 1;
+    min-width: 0;
+}
+
+.crtformr {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.crtformel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.crtfld {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.crtlbl {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3D3D3D;
+}
+
+.crtpriceico {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.crtprice {
+    padding-right: 40px !important;
+}
+
+.crtprice::-webkit-outer-spin-button,
+.crtprice::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.crtprice {
+    -moz-appearance: textfield;
+}
+
+.crtupload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 96px;
+    background: #FAFAFA;
+    border: 2px dashed #C1C1C1;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    color: #666666;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    text-align: center;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.crtupload:hover {
+    border-color: #912ADF;
+    color: #912ADF;
+    background: #FFFFFF;
+}
+
+.crtupload i {
+    font-size: 20px;
+}
+
+.crtupmsg {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.crtupname {
+    font-size: 12px;
+    color: #912ADF;
+    word-break: break-all;
+}
+
+.crt3dfld {
+    display: none;
+}
+
+.crt3dfld.visible {
+    display: flex;
+}
+
+.crt3dbtn {
+    align-self: flex-start;
+}
+
+.crt3dmodal {
+    width: 94% !important;
+    max-width: 640px !important;
+    max-height: calc(100vh - 32px) !important;
+    overflow-y: auto !important;
+}
+
+.crt3dbody {
+    padding: 16px !important;
+    background: #E0E0E0 !important;
+}
+
+.crt3dview {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background: #FAFAFA;
+    border: 2px solid #C1C1C1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-sizing: border-box;
+    touch-action: none;
+}
+
+.crt3dhint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 11px;
+    color: #718096;
+}
+
+.crt3dhint i {
+    font-size: 11px;
+}
+
+.crt3dtf {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    background: #FAFAFA;
+    border: 2px solid #C1C1C1;
+    border-radius: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.crt3dtfsec {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.crt3dtflbl {
+    width: 44px;
+    flex-shrink: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #3D3D3D;
+}
+
+.crt3dtfrw {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.crt3daxlbl {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: #718096;
+}
+
+.crt3daxbox {
+    width: 62px !important;
+    height: 28px !important;
+    border-radius: 6px !important;
+}
+
+.crt3dax {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    -moz-appearance: textfield !important;
+}
+
+.crt3dax::-webkit-outer-spin-button,
+.crt3dax::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.crt3dsnap {
+    height: 32px;
+    padding: 0 24px 0 8px;
+    background: #FFFFFF;
+    border: 2px solid rgba(61, 61, 61, 0.25);
+    border-radius: 6px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #3D3D3D;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.crt3dsnap:focus {
+    border-color: rgba(61, 61, 61, 0.25);
+}
+
+.crt3dreset {
+    margin-left: auto;
+}
+
+.crtassetmeta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.crtassetrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    color: #666666;
+}
+
+.crtassetrow strong {
+    font-weight: 500;
+    color: #3D3D3D;
+}
+
+@media (max-width: 996px) {
+    .crtform {
+        flex-direction: column;
+    }
+    .crtformr {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .crt3dview {
+        height: 60vh;
+    }
+}

@@ -1,0 +1,109 @@
+<div id="tab-profile" class="settabcntnt{{if eq .ActiveTab "profile"}} active{{end}}">
+    <div class="setcrd">
+        <h3 class="setttl">Change Bio</h3>
+        <form action="/settings/bio" method="POST" hx-boost="false" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="instk">
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setareabox">
+                            <textarea name="bio" class="setarea" placeholder="Tell us about yourself..." maxlength="1024">{{.UserBio}}</textarea>
+                        </div>
+                        <span class="ttptxt">Maximum of 1024 characters</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm" style="align-self: flex-start;">
+                <span>Save Bio</span>
+            </button>
+        </form>
+
+        <div style="height: 1px; background: #e0e0e0; margin: 24px 0;"></div>
+
+        <h3 class="setttl">Change Pronouns</h3>
+        <form action="/settings/pronouns" method="POST" hx-boost="false" style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="instk">
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="text" name="pronouns" class="setin" placeholder="e.g. they/them" maxlength="16" value="{{.UserPronouns}}" autocomplete="off">
+                        </div>
+                        <span class="ttptxt">Maximum of 16 characters</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm" style="align-self: flex-start;">
+                <span>Save Pronouns</span>
+            </button>
+        </form>
+
+        <div style="height: 1px; background: #e0e0e0; margin: 24px 0;"></div>
+
+        <h3 class="setttl">Social Links</h3>
+        <span class="setinf" style="margin-bottom: 0 !important;">Click on any icon to add a social link !!</span>
+        <div style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 14px; align-items: center; margin: 12px 0;">
+            <i class="fa-brands fa-discord sclico active" style="color: #5865F2;" data-platform="discord" data-name="Discord" data-placeholder="Discord username or server invite" data-value="{{range .UserSocials}}{{if eq .Platform "discord"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-x-twitter sclico" style="color: #000000;" data-platform="twitter" data-name="Twitter / X" data-placeholder="Twitter/X (@handle)" data-value="{{range .UserSocials}}{{if eq .Platform "twitter"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-youtube sclico" style="color: #FF0000;" data-platform="youtube" data-name="YouTube" data-placeholder="YouTube (@channel)" data-value="{{range .UserSocials}}{{if eq .Platform "youtube"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-twitch sclico" style="color: #9146FF;" data-platform="twitch" data-name="Twitch" data-placeholder="Twitch channel name" data-value="{{range .UserSocials}}{{if eq .Platform "twitch"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-github sclico" style="color: #24292e;" data-platform="github" data-name="GitHub" data-placeholder="GitHub username" data-value="{{range .UserSocials}}{{if eq .Platform "github"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-instagram sclico" style="color: #E1306C;" data-platform="instagram" data-name="Instagram" data-placeholder="Instagram (@username)" data-value="{{range .UserSocials}}{{if eq .Platform "instagram"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-tiktok sclico" style="color: #000000;" data-platform="tiktok" data-name="TikTok" data-placeholder="TikTok (@username)" data-value="{{range .UserSocials}}{{if eq .Platform "tiktok"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+            <i class="fa-brands fa-steam sclico" style="color: #171a21;" data-platform="steam" data-name="Steam" data-placeholder="Steam profile ID or custom name" data-value="{{range .UserSocials}}{{if eq .Platform "steam"}}{{.Value}}{{end}}{{end}}" onclick="window.selectSocialPlatform(this)"></i>
+        </div>
+
+        <form action="/settings/socials" method="POST" id="socialEditForm" hx-boost="false" style="display: flex; flex-direction: column; gap: 12px;">
+            <input type="hidden" name="platform" id="sclPlatformInput" value="discord">
+            <div class="instk">
+                <div class="instkrw">
+                    <div class="ttpcnt">
+                        <div class="setinbox">
+                            <input type="text" name="value" id="sclValInput" class="setin" placeholder="Discord username or server invite" autocomplete="off">
+                        </div>
+                        <span class="ttptxt">Username or link</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="primary hpyprim hpyinl hpysm" style="align-self: flex-start;">
+                <span>Save Socials</span>
+            </button>
+        </form>
+
+        <div style="height: 1px; background: #e0e0e0; margin: 24px 0;"></div>
+
+        <h3 class="setttl">Profile Music</h3>
+        <span class="setinf">Play tracks on your profile via Deezer!</span>
+
+        <div id="settingsMusicSection" data-music-id="{{.UserMusicID}}" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; width: 100%;">
+            <div id="settingsMusPlayerCard" class="musplayer-container" style="display: none;">
+                <div class="musplayer">
+                    <img id="setMusPlayerCover" src="" alt="" class="musplayer-cvr">
+                    <div class="musplayer-meta">
+                        <span id="setMusPlayerTitle" class="musplayer-ttl">Track Title</span>
+                        <span id="setMusPlayerArtist" class="musplayer-art">Artist Name</span>
+                    </div>
+                    <button type="button" id="setMusPlayerPlayBtn" class="musplayer-plybtn" onclick="window.toggleSettingsTrack()" title="Play/Pause">
+                        <i id="setMusPlayerPlayIcon" class="fa-solid fa-play"></i>
+                    </button>
+                    <div class="musplayer-seek">
+                        <span id="setMusPlayerCurTime" class="musplayer-time">0:00</span>
+                        <div class="musplayer-barcnt" onclick="window.seekSettingsTrack(event)">
+                            <div id="setMusPlayerBarFill" class="musplayer-barfill"></div>
+                        </div>
+                        <span id="setMusPlayerDurTime" class="musplayer-time">0:30</span>
+                    </div>
+                    <button type="button" id="setMusPlayerVolBtn" class="musplayer-volbtn" onclick="window.toggleMuteSettingsTrack()" title="Mute/Unmute">
+                        <i id="setMusPlayerVolIcon" class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <button type="button" class="musplayer-removebtn" onclick="window.removeProfileMusic()" title="Remove Profile Song">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="primary hpyprim hpyinl hpysm" onclick="openMusicModal()" style="align-self: flex-start;">
+            <img src="/static/useful/icons/music.png" class="hpyico" alt="">
+            <span>Search Songs</span>
+        </button>
+    </div>
+</div>

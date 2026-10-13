@@ -1,0 +1,12 @@
+<div id="appModal" class="movl" onclick="window.closeModalOnOverlay(event)">
+    <div class="mcard" onclick="event.stopPropagation()">
+        <div class="mhdr">
+            <h3 class="mtitle" id="appModalTitle"></h3>
+            <p class="msub" id="appModalSubtitle" style="display: none;"></p>
+            <button type="button" class="mclose" onclick="window.closeModal()" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="mbody" id="appModalBody"></div>
+    </div>
+</div>

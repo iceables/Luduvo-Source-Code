@@ -1,0 +1,48 @@
+<div class="hrocnt">
+    <div class="hrotxt">
+        <h1 class="hrohdg">The creativity free platform</h1>
+        <p class="hroprg">
+            Join over <strong>{{.UserCount}}</strong> users creating, destroying, and rebuilding on Buildoverse!
+        </p>
+        <div class="hrobtns">
+            <button hx-get="/register" hx-target="body" hx-push-url="true" class="primary">
+                <span>Register</span>
+            </button>
+            <button hx-get="/login" hx-target="body" hx-push-url="true" class="primary">
+                <span>Login</span>
+            </button>
+        </div>
+    </div>
+    <div class="hroimgcnt">
+        <div class="ttpcnt">
+            <img src="/static/useful/pages/land/g21art.png" alt="Buildoverse Art" class="hroimg">
+            <span class="ttptxt">Buildoverse</span>
+        </div>
+    </div>
+</div>
+
+{{if .Games}}
+<div class="crlsec">
+    <h2 class="crlttl">Games</h2>
+    <div class="crlwrp">
+        <div class="crlcnt" id="gamesCarousel">
+            {{range .Games}}
+            <a href="/games/{{.ID}}" class="gmcrd">
+                <div class="gmthmwrp">
+                    <img src="/thumbnails/{{.ID}}.png"
+                         onerror="this.src='/static/useful/temp/pfp.png'; this.style.filter='blur(10px)';"
+                         alt="{{.Name}}" class="gmthm">
+                </div>
+                <div class="gminf">
+                    <div class="gmnm">{{.Name}}</div>
+                    <div class="gmply">
+                        <i class="fa-solid fa-users"></i>
+                        <span>{{.Playing}}</span>
+                    </div>
+                </div>
+            </a>
+            {{end}}
+        </div>
+    </div>
+</div>
+{{end}}

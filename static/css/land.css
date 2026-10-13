@@ -1,0 +1,225 @@
+@keyframes landentrysubtlebounce {
+    0% {
+        opacity: 0;
+        transform: scale(0.88) translateY(8px);
+    }
+    60% {
+        opacity: 0.95;
+        transform: scale(1.03) translateY(-1px);
+    }
+    85% {
+        transform: scale(0.99) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.hrocnt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px 40px 20px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.hrotxt {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+.hrohdg {
+    font-size: 3.2rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #333333;
+    animation: landentrysubtlebounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) backwards;
+    animation-delay: 0.1s;
+}
+.hroprg {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: #555555;
+    animation: landentrysubtlebounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) backwards;
+    animation-delay: 0.2s;
+}
+.hroprg strong {
+    color: var(--accent, #912ADF);
+    font-weight: bold;
+}
+.hrobtns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    animation: landentrysubtlebounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) backwards;
+    animation-delay: 0.3s;
+}
+.hrobtns .primary {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    display: inline-flex !important;
+}
+.hroimgcnt {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: landentrysubtlebounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) backwards;
+    animation-delay: 0.15s;
+}
+.hroimg {
+    width: 100%;
+    max-width: 400px;
+    max-height: 350px;
+    height: auto;
+    object-fit: contain;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.hroimg:hover {
+    transform: scale(1.04);
+}
+.hroimg:active {
+    transform: scale(0.98) rotateX(-15deg);
+    transition: transform 0.08s ease;
+}
+.crlsec {
+    padding: 20px 40px 40px 40px;
+    background: transparent;
+    border-radius: 0 0 6px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    animation: landentrysubtlebounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) backwards;
+    animation-delay: 0.35s;
+}
+.crlttl {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+.crlwrp {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.crlcnt {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+}
+.crlcnt::-webkit-scrollbar {
+    display: none;
+}
+.crlcnt {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.gmcrd {
+    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
+    height: 148px;
+    background: #fbfbfb;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 8px;
+    box-sizing: border-box;
+    text-decoration: none;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+}
+.gmcrd:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 16px rgba(145, 42, 223, 0.12);
+}
+.gmcrd:active {
+    transform: scale(0.98) rotateX(-15deg);
+    transition: transform 0.08s ease;
+}
+.gmthmwrp {
+    width: 100%;
+    height: 92px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f1f5f9;
+    flex-shrink: 0;
+}
+.gmthm {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.gminf {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.gmnm {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3748;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+}
+.gmply {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #718096;
+    font-family: 'Ubuntu', sans-serif;
+}
+.gmply i {
+    font-size: 10px;
+    color: var(--accent, #912ADF);
+}
+
+html.notreq .hrohdg,
+html.notreq .hroprg,
+html.notreq .hrobtns,
+html.notreq .hroimgcnt,
+html.notreq .crlsec {
+    animation: none !important;
+}
+
+@media (max-width: 768px) {
+    .hrocnt {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 24px;
+    }
+    .hrotxt {
+        align-items: center;
+        text-align: center;
+    }
+    .crlsec {
+        padding: 20px 24px 40px 24px;
+    }
+}

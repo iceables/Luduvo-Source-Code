@@ -1,0 +1,25 @@
+<div id="musPlayerCard" class="musplayer-container" style="display: none;">
+    <div class="musplayer">
+        <img id="musPlayerCover" src="" alt="" class="musplayer-cvr">
+        <div class="musplayer-meta">
+            <span id="musPlayerTitle" class="musplayer-ttl">Track Title</span>
+            <span id="musPlayerArtist" class="musplayer-art">Artist Name</span>
+        </div>
+        <button type="button" id="musPlayerPlayBtn" class="musplayer-plybtn" onclick="window.toggleCurrentTrack()" title="Play/Pause">
+            <i id="musPlayerPlayIcon" class="fa-solid fa-play"></i>
+        </button>
+        <div class="musplayer-seek">
+            <span id="musPlayerCurTime" class="musplayer-time">0:00</span>
+            <div class="musplayer-barcnt" onclick="window.seekCurrentTrack(event)">
+                <div id="musPlayerBarFill" class="musplayer-barfill"></div>
+            </div>
+            <span id="musPlayerDurTime" class="musplayer-time">0:30</span>
+        </div>
+        <button type="button" id="musPlayerVolBtn" class="musplayer-volbtn" onclick="window.toggleMuteCurrentTrack()" title="Mute/Unmute">
+            <i id="musPlayerVolIcon" class="fa-solid fa-volume-high"></i>
+        </button>
+    </div>
+    <button type="button" id="musPlayerUpdateBtn" class="primary hpyprim hpyinl hpysm musplayer-updatebtn" onclick="window.updateProfileMusic()" title="Set as Profile Music">
+        <span>Update Profile Music</span>
+    </button>
+</div>

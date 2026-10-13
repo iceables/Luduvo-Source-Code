@@ -1,0 +1,49 @@
+<div class="shp-grid" id="shopGrid">
+    {{range $idx, $item := .Items}}
+    <div class="shp-card" data-id="{{$item.ID}}">
+        <div class="avtitmimg{{if or (eq $item.OnSale "false") (eq $item.OffSale "true")}} shp-offimg{{end}}">
+            <img src="/api/v1/avatar/shop/{{$item.Type}}/{{$item.ID}}" alt="{{$item.Name}}" loading="lazy" class="avtldimg" onerror="this.src='/static/useful/temp/pfp.png'; this.classList.add('ld');" onload="this.classList.add('ld');">
+            {{if and (ne $item.OnSale "false") (ne $item.OffSale "true") (ne $item.Special "true") (eq $item.Bucks 0) (eq $item.Bits 0)}}
+                <span class="avtitmbdg" style="background: rgba(40, 167, 69, 0.85);">Free</span>
+            {{end}}
+        </div>
+        {{if or (eq $item.OnSale "false") (eq $item.OffSale "true")}}
+        <div class="shp-ribbon shp-ribbon-off">
+            <img src="/static/useful/icons/off.png" class="shp-ribicon" alt="Offsale">
+            <span class="shp-ribtext">OFFSALE</span>
+        </div>
+        {{else if eq $item.Special "true"}}
+        <div class="shp-ribbon shp-ribbon-special">
+            <img src="/static/useful/icons/special.png" class="shp-ribicon" alt="Special">
+            <span class="shp-ribtext">SPECIAL</span>
+        </div>
+        {{end}}
+        <div class="avtitmmeta">
+            <span class="avtitmnm">{{$item.Name}}</span>
+            <span class="avtitmcr">by {{$item.CreatorName}}</span>
+        </div>
+        <div class="shp-price-row">
+            {{if or (eq $item.OnSale "false") (eq $item.OffSale "true")}}
+                <span class="shp-price-off">Offsale</span>
+            {{else if and (eq $item.Bucks 0) (eq $item.Bits 0)}}
+                <span class="shp-price-free">Free</span>
+            {{else}}
+                {{if gt $item.Bucks 0}}
+                <span class="shp-price-val">
+                    <img src="/static/useful/icons/verticec.png" class="shp-price-ico" alt="Vertices">
+                    <span>{{$item.Bucks}}</span>
+                </span>
+                {{end}}
+                {{if gt $item.Bits 0}}
+                <span class="shp-price-val">
+                    <img src="/static/useful/icons/ticketc.png" class="shp-price-ico" alt="Tickets">
+                    <span>{{$item.Bits}}</span>
+                </span>
+                {{end}}
+            {{end}}
+        </div>
+    </div>
+    {{else}}
+    <div class="feedemt" style="grid-column: 1 / -1;">No items found matching your filters.</div>
+    {{end}}
+</div>

@@ -1,0 +1,205 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/frn.css">
+<link rel="stylesheet" href="/static/css/prof.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">User #{{.TargetUser.ID}}</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/admin" hx-target="body" hx-push-url="true" class="button barbtn">Back to Admin</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="prfhdr">
+                <div class="prfinf">
+                    <div class="prfavt">
+                        <img src="/api/v1/avatar/headshot/{{.TargetUser.ID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.TargetUser.Username}}">
+                    </div>
+                    <div class="prfmeta">
+                        <h1 class="prfdn">
+                            <span>{{.TargetUser.DisplayName}}</span>
+                            {{if .TargetUser.Pronouns}}<span class="prfprn">({{.TargetUser.Pronouns}})</span>{{end}}
+                        </h1>
+                        <span class="prfun">@{{.TargetUser.Username}} #{{.TargetUser.ID}}</span>
+                        <div class="prfsts">
+                            <span class="adm-badge adm-badge-{{if eq .TargetUser.RoleName "head manager"}}head-manager{{else if eq .TargetUser.RoleName "Buildoverse-team"}}Buildoverse-team{{else}}{{.TargetUser.RoleName}}{{end}}">{{.TargetUser.RoleDisplay}}</span>
+                            <span class="prfst">Power <strong>{{.TargetUser.Power}}</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prfbody">
+                <div class="prfboxes-row">
+                    <div class="prfsec adm-rendsec">
+                        <h2 class="prfboxttl">Avatar Render</h2>
+                        <div class="adm-rendcrd">
+                            <img src="/avatar/{{.TargetUser.ID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.TargetUser.Username}}" class="adm-rendimg">
+                        </div>
+                        {{if .CanModerate}}
+                        <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/admin/users/{{.TargetUser.ID}}/resetavatar" hx-include="#admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Reset this user's avatar to the default?">
+                            <span>Reset Avatar</span>
+                        </button>
+                        {{end}}
+                    </div>
+
+                    <div class="prfsec">
+                        <h2 class="prfboxttl">Currently Wearing</h2>
+                        <div class="adm-panel">
+                            <div class="adm-rowlst">
+                                {{if .Avatar}}
+                                <div class="adm-row"><span class="adm-lbl">Face</span><span class="adm-val">{{if gt .Avatar.Face 0}}Item #{{.Avatar.Face}}{{else}}Default Face{{end}}</span></div>
+                                <div class="adm-row"><span class="adm-lbl">Shirt</span><span class="adm-val">{{if gt .Avatar.Shirt 0}}Item #{{.Avatar.Shirt}}{{else}}None{{end}}</span></div>
+                                <div class="adm-row"><span class="adm-lbl">Pants</span><span class="adm-val">{{if gt .Avatar.Pants 0}}Item #{{.Avatar.Pants}}{{else}}None{{end}}</span></div>
+                                <div class="adm-row"><span class="adm-lbl">T-Shirt</span><span class="adm-val">{{if gt .Avatar.TShirt 0}}Item #{{.Avatar.TShirt}}{{else}}None{{end}}</span></div>
+                                <div class="adm-row"><span class="adm-lbl">Tool</span><span class="adm-val">{{if gt .Avatar.Tool 0}}Item #{{.Avatar.Tool}}{{else}}None{{end}}</span></div>
+                                <div class="adm-row"><span class="adm-lbl">Hats</span><span class="adm-val">
+                                    {{if or (gt .Avatar.Hat1 0) (gt .Avatar.Hat2 0) (gt .Avatar.Hat3 0) (gt .Avatar.Hat4 0) (gt .Avatar.Hat5 0)}}
+                                        {{if gt .Avatar.Hat1 0}}#{{.Avatar.Hat1}} {{end}}
+                                        {{if gt .Avatar.Hat2 0}}#{{.Avatar.Hat2}} {{end}}
+                                        {{if gt .Avatar.Hat3 0}}#{{.Avatar.Hat3}} {{end}}
+                                        {{if gt .Avatar.Hat4 0}}#{{.Avatar.Hat4}} {{end}}
+                                        {{if gt .Avatar.Hat5 0}}#{{.Avatar.Hat5}} {{end}}
+                                    {{else}}None{{end}}
+                                </span></div>
+                                <div class="adm-row"><span class="adm-lbl">Body Colors</span><span class="adm-val">Head #{{.Avatar.HeadColor}}, Torso #{{.Avatar.TorsoColor}}, L.Arm #{{.Avatar.LArmColor}}, R.Arm #{{.Avatar.RArmColor}}, L.Leg #{{.Avatar.LLegColor}}, R.Leg #{{.Avatar.RLegColor}}</span></div>
+                                {{else}}
+                                <div class="adm-row"><span class="adm-lbl">Avatar Data</span><span class="adm-val">Default Setup</span></div>
+                                {{end}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prfsec">
+                    <h2 class="prfboxttl">Saved Outfits</h2>
+                    <div class="adm-panel">
+                        <div class="adm-rowlst">
+                            {{range .Outfits}}
+                            <div class="adm-row adm-outfitrow">
+                                <img src="/avatar/outfit/{{.ID}}.png" alt="{{.Name}}" loading="lazy" class="adm-outfitimg" onerror="this.src='/static/useful/temp/pfp.png';">
+                                <span class="adm-lbl">{{.Name}}</span>
+                                <span class="adm-val">#{{.ID}} {{.CreatedAt.Format "Jan 02, 2006"}}</span>
+                                {{if $.CanModerate}}
+                                <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/admin/users/{{$.TargetUser.ID}}/outfits/{{.ID}}/delete" hx-include="#admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Delete this outfit?">
+                                    <span>Delete</span>
+                                </button>
+                                {{end}}
+                            </div>
+                            {{else}}
+                            <div class="adm-row"><span class="adm-val">No saved outfits</span></div>
+                            {{end}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prfsec">
+                    <h2 class="prfboxttl">Account Details</h2>
+                    <div class="adm-panel">
+                        <div class="adm-rowlst-grid">
+                            <div class="adm-row"><span class="adm-lbl">User ID</span><span class="adm-val">#{{.TargetUser.ID}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Username</span><span class="adm-val">@{{.TargetUser.Username}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Display Name</span><span class="adm-val">{{.TargetUser.DisplayName}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Email</span><span class="adm-val">{{.TargetUser.Mail}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Unikey</span><span class="adm-val">{{.TargetUser.Unikey}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Joined</span><span class="adm-val">{{.TargetUser.CreationDate}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Last Online</span><span class="adm-val">{{.TargetUser.LastOnline}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Vertices</span><span class="adm-val">{{.TargetUser.Bucks}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Tix</span><span class="adm-val">{{.TargetUser.Bits}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Views</span><span class="adm-val">{{.TargetUser.Views}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Pronouns</span><span class="adm-val">{{if .TargetUser.Pronouns}}{{.TargetUser.Pronouns}}{{else}}Not set{{end}}</span></div>
+                            <div class="adm-row"><span class="adm-lbl">Bio</span><span class="adm-val">{{if .TargetUser.Description}}{{.TargetUser.Description}}{{else}}No bio{{end}}</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                {{if .CanModerate}}
+                <div class="prfsec">
+                    <h2 class="prfboxttl">Moderation Actions</h2>
+                    <div class="adm-panel">
+                        <input type="hidden" name="csrf" value="{{.CSRF}}" id="admCsrf">
+                        <div class="adm-modact">
+                            <div class="setinbox adm-modreason">
+                                <input type="text" id="admModReason" name="reason" class="setin" placeholder="Reason (optional)" autocomplete="off">
+                            </div>
+                            <div class="adm-modbtns">
+                                <button type="button" class="primary hpywrn hpyinl hpysm" hx-post="/admin/users/{{.TargetUser.ID}}/scrub/description" hx-include="#admModReason, #admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Scrub this user's description?">
+                                    <span>Scrub Description</span>
+                                </button>
+                                <button type="button" class="primary hpywrn hpyinl hpysm" hx-post="/admin/users/{{.TargetUser.ID}}/scrub/displayname" hx-include="#admModReason, #admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Scrub this user's display name?">
+                                    <span>Scrub Display Name</span>
+                                </button>
+                                <button type="button" class="primary hpywrn hpyinl hpysm" hx-post="/admin/users/{{.TargetUser.ID}}/scrub/pronouns" hx-include="#admModReason, #admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Scrub this user's pronouns?">
+                                    <span>Scrub Pronouns</span>
+                                </button>
+                                <button type="button" class="primary hpydng hpyinl hpysm" hx-post="/admin/users/{{.TargetUser.ID}}/scrub/username" hx-include="#admModReason, #admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Scrub this user's username?">
+                                    <span>Scrub Username</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{end}}
+
+                <div class="prfsec">
+                    <h2 class="prfboxttl">Moderation History</h2>
+                    <div class="adm-tblcnt">
+                        <table class="adm-usrtbl">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Action</th>
+                                    <th>Reason</th>
+                                    <th>Issued By</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{range .ModHistory}}
+                                <tr>
+                                    <td>#{{.ID}}</td>
+                                    <td><strong class="adm-act">{{.ActionLabel}}</strong></td>
+                                    <td>{{.Reason}}</td>
+                                    <td>{{.AdminName}}</td>
+                                    <td>
+                                        {{if eq .Status "active"}}
+                                        <span class="adm-stat"><span class="adm-ind adm-ind-offline"></span>{{.StatusLabel}}</span>
+                                        {{else if eq .Status "retracted"}}
+                                        <span class="adm-stat"><span class="adm-ind adm-ind-online"></span>{{.StatusLabel}}</span>
+                                        {{else}}
+                                        <span class="adm-stat"><span class="adm-ind adm-ind-online"></span>{{.StatusLabel}}</span>
+                                        {{end}}
+                                    </td>
+                                    <td>{{.CreationDate.Format "Jan 02, 2006 15:04"}}</td>
+                                    <td>
+                                        {{if .CanRetract}}
+                                        <button type="button" class="primary hpyinf hpyinl hpysm" hx-post="/admin/users/{{$.TargetUser.ID}}/modhist/{{.ID}}/retract" hx-include="#admCsrf" hx-target="body" hx-push-url="true" hx-confirm="Retract this moderation action?">
+                                            <span>Retract</span>
+                                        </button>
+                                        {{end}}
+                                    </td>
+                                </tr>
+                                {{else}}
+                                <tr>
+                                    <td colspan="7" class="adm-tblemt">No moderation records found</td>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

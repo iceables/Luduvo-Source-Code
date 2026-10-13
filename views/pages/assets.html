@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/avt.css">
+<link rel="stylesheet" href="/static/css/shop.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">My Assets</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search" id="assetSearch" autocomplete="off">
+            </div>
+            <div class="barbtns">
+                <a href="/create?type=asset" hx-get="/create?type=asset" hx-target="body" hx-push-url="true" class="button barbtn" style="text-decoration: none;">Create</a>
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="shp-lay">
+                <div class="shp-hdr-block">
+                    <h1 class="shp-heading">My Assets</h1>
+                    <span class="shp-subheading">Assets are reviewed by our moderation team before they can be used</span>
+                </div>
+                <div class="shp-grid" id="assetGrid">
+                    {{range .Assets}}
+                    <div class="shp-card" data-id="{{.ID}}" data-type="{{.Type}}">
+                        <div class="avtitmimg{{if eq .Type "sound"}} avtitmico{{end}}">
+                            {{if eq .Type "image"}}
+                            <img src="/api/v1/assets/{{.ID}}/file" alt="{{.Name}}" loading="lazy" class="avtldimg" onerror="this.src='/static/useful/temp/pfp.png';">
+                            {{else if eq .Type "sound"}}
+                            <i class="fa-solid fa-music"></i>
+                            {{else}}
+                            <img src="/api/v1/assets/{{.ID}}/render" alt="{{.Name}}" loading="lazy" class="avtldimg" onerror="this.src='/static/useful/temp/pfp.png';">
+                            {{end}}
+                            <span class="avtitmbdg avtitmbdg-{{.ApprovalState}}">{{.ApprovalLabel}}</span>
+                        </div>
+                        <div class="avtitmmeta">
+                            <span class="avtitmnm">{{.Name}}</span>
+                            <span class="avtitmcr">{{.TypeName}} {{.CreatedAt.Format "Jan 02, 2006"}}</span>
+                        </div>
+                        {{if .ReviewNote}}
+                        <span class="avtitmnote">{{.ReviewNote}}</span>
+                        {{end}}
+                    </div>
+                    {{else}}
+                    <div class="feedemt" style="grid-column: 1 / -1;">You haven't uploaded any assets yet.</div>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/assets/assets.js"></script>

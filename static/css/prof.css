@@ -1,0 +1,351 @@
+.prfhdr {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 36px;
+    background: transparent;
+    color: #3d3d3d;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.prfinf {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.prfavt {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.06);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prfavt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prfmeta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.prfdn {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0;
+    line-height: 1.1;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.prfprn {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #718096;
+}
+
+.prfun {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #718096;
+    margin-bottom: 10px;
+}
+
+.prfsts {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    color: #4a5568;
+}
+
+.prfst {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.prfst strong {
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.prfact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-end;
+}
+
+.prfbody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 36px 36px 36px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.prftabcnt {
+    position: relative;
+    width: 100%;
+    background: rgba(61, 61, 61, 0.12);
+    border: 1px solid #C1C1C1;
+    border-radius: 8px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.prftablst {
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 2;
+}
+
+.prftabind {
+    position: absolute;
+    background: rgba(236, 236, 236, 0.7);
+    border: 1px solid #C1C1C1;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s cubic-bezier(0.25, 1, 0.5, 1), top 0.3s cubic-bezier(0.25, 1, 0.5, 1), height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.prftabbtn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    height: 36px;
+    color: #666666;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    border-radius: 6px;
+    outline: none;
+}
+
+.prftabbtn:hover {
+    color: #3D3D3D;
+}
+
+.prftabbtn.active {
+    color: #3D3D3D;
+}
+
+.prfcrd {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+}
+
+.prfchrcrd {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 380px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent;
+    border-radius: 0;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    position: relative !important;
+}
+
+.prfchrcrd:active {
+    cursor: grabbing;
+}
+
+.prfchrcrd canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    outline: none;
+}
+
+.prfchrimg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.prfboxes-row {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.prfsec {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.prfboxttl {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333333;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.prfbox-card {
+    background: rgba(0, 0, 0, 0.02);
+    border: 3px dashed #C1C1C1;
+    border-radius: 12px;
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.prfwrngbox {
+    min-height: 110px;
+}
+
+.prfabtbox {
+    min-height: 110px;
+}
+
+.prfboxtxt {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #333333;
+    line-height: 1.6;
+    margin: 0;
+    word-break: break-word;
+}
+
+.prfscls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.prfsclico {
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+}
+
+.prfsclico:hover {
+    opacity: 0.8;
+}
+
+.prf-music-widget {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+    width: 300px !important;
+    max-width: calc(100vw - 32px) !important;
+    animation: prfMusicSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+}
+
+@keyframes prfMusicSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .prfhdr {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 20px;
+        gap: 16px;
+    }
+    .prfinf {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .prfavt {
+        width: 84px;
+        height: 84px;
+    }
+    .prfdn {
+        font-size: 26px;
+    }
+    .prfun {
+        font-size: 15px;
+    }
+    .prfsts {
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 14px;
+    }
+    .prfact {
+        width: 100%;
+        flex-wrap: wrap;
+        align-self: flex-start;
+    }
+    .prfbody {
+        padding: 0 20px 24px 20px;
+    }
+    .prfboxes-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .prfchrcrd {
+        height: 300px;
+    }
+}

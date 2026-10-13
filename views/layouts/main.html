@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{template "components/layout/head" .}}
+</head>
+<body hx-boost="true">
+    {{template "components/layout/navbar" .}}
+    {{embed}}
+    {{template "components/layout/footer"}}
+    {{template "elements/modal"}}
+</body>
+</html>

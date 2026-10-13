@@ -1,0 +1,53 @@
+<div class="tabcnt" data-active-user="{{.Username}}">
+    <div class="tablst">
+        <div class="tabind"></div>
+        <button class="tabbtn active" data-tab="worldwide">Worldwide Feed</button>
+        <button class="tabbtn" data-tab="friends">Friends Feed</button>
+    </div>
+    <form action="/api/v1/feed" method="POST" class="feedinbox" hx-boost="false">
+        <input type="hidden" name="feed_type" id="feedTypeInput" value="worldwide">
+        <input type="text" name="content" class="feedin" placeholder="Chat in Worldwide Feed" required autocomplete="off">
+        <button type="submit" class="feedsnd">
+            <i class="fa-solid fa-paper-plane" style="font-size: 24px !important;"></i>
+        </button>
+    </form>
+    <div class="pstlst">
+        {{range $post := .Feed}}
+        <div class="pstitm" data-id="{{$post.ID}}" data-username="{{$post.Username}}" data-feed-type="worldwide">
+            <div class="pstcrd">
+                <div class="pstavt">
+                    <img src="/api/v1/avatar/headshot/{{$post.UserID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{$post.Username}}">
+                </div>
+                <div class="psthdr">
+                    <a href="/user/{{$post.UserID}}" hx-get="/user/{{$post.UserID}}" hx-target="body" hx-push-url="true" class="pstaut">{{$post.Username}}</a>
+                    <div class="ttpcnt">
+                        <span class="psttme">{{$post.TimeAgo}}</span>
+                        <span class="ttptxt">{{$post.FullDate}}</span>
+                    </div>
+                </div>
+                <div class="pstact">
+                    <div class="pstrpl" title="Reply">
+                        <i class="fa-solid fa-reply"></i>
+                    </div>
+                    <div class="pstrct" title="Add Reaction">
+                        <img src="/static/useful/icons/fadd.png" alt="Add Reaction" class="pstico">
+                    </div>
+                    <a href="/report/feed/{{$post.ID}}" hx-get="/report/feed/{{$post.ID}}" hx-target="body" hx-push-url="true" class="pstflg" title="Report">
+                        <i class="fa-solid fa-flag"></i>
+                    </a>
+                </div>
+                <div class="pbdy">{{$post.Content}}</div>
+            </div>
+            <div class="rctbdg{{if $post.HasReacted}} reacted{{end}}">
+                <div class="rctico">
+                    <i class="fa-regular fa-face-laugh-squint"></i>
+                </div>
+                <span class="rctcnt" data-target="{{$post.Reactions}}">0</span>
+            </div>
+            <div class="cmtlst" data-feed-id="{{$post.ID}}"></div>
+        </div>
+        {{end}}
+    </div>
+</div>
+
+<script type="module" src="/static/js/feed/feed.js"></script>

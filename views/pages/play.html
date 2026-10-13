@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/static/css/dash.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar"><span class="title">Play</span></div>
+        <div class="pane">
+            {{if .Games}}
+            {{template "components/dashboard/games" .}}
+            {{else}}
+            <div class="setcrd" style="padding:16px"><p>No places are public yet. Create one and it shows up here.</p></div>
+            {{end}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,395 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/frn.css">
+<link rel="stylesheet" href="/static/css/admin.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Admin</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/admin" hx-target="body" hx-push-url="true" class="button barbtn">Refresh</button>
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="frmlay">
+                <div class="frmmain" style="padding-top: 24px !important;">
+                    <div class="tabcnt settabcnt" style="max-width: 100% !important;">
+                        <div class="tablst">
+                            <div class="tabind"></div>
+                            <button class="tabbtn{{if eq .ActiveTab "status"}} active{{end}}" onclick="window.switchAdminTab('status', event)">Status</button>
+                            <button class="tabbtn{{if eq .ActiveTab "users"}} active{{end}}" onclick="window.switchAdminTab('users', event)">Users</button>
+                            <button class="tabbtn{{if eq .ActiveTab "reports"}} active{{end}}" onclick="window.switchAdminTab('reports', event)">Reports</button>
+                            <button class="tabbtn{{if eq .ActiveTab "assets"}} active{{end}}" onclick="window.switchAdminTab('assets', event)">Assets</button>
+                            <button class="tabbtn{{if eq .ActiveTab "logs"}} active{{end}}" onclick="window.switchAdminTab('logs', event)">Logs</button>
+                        </div>
+
+                        <div class="settabvwp">
+                            <div id="tab-status" class="settabcntnt active">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Server Status</h3>
+
+                                    <div class="adm-grid">
+                                        <div class="adm-card">
+                                            <div class="adm-cardhdr">
+                                                <h3 class="adm-cardttl">
+                                                    <i class="fa-solid fa-server"></i>
+                                                    <span>Runtime</span>
+                                                </h3>
+                                                <span class="adm-stat"><span class="adm-ind adm-ind-online"></span>Online</span>
+                                            </div>
+                                            <div class="adm-rowlst">
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Uptime</span>
+                                                    <span class="adm-val highlight" id="admUptime" data-start-time-ms="{{.StartTimeMs}}">{{.Uptime}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Started</span>
+                                                    <span class="adm-val">{{.StartTime}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Compiled</span>
+                                                    <span class="adm-val">{{.CompilationDate}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="adm-card">
+                                            <div class="adm-cardhdr">
+                                                <h3 class="adm-cardttl">
+                                                    <i class="fa-solid fa-microchip"></i>
+                                                    <span>Performance</span>
+                                                </h3>
+                                            </div>
+                                            <div class="adm-rowlst">
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">CPU Cores</span>
+                                                    <span class="adm-val">{{.NumCPU}} Cores</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">CPU Usage</span>
+                                                    <span class="adm-val highlight" id="admCpuUsage">{{.CPUUsage}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">App RAM</span>
+                                                    <span class="adm-val" id="admMemAlloc">{{.MemAlloc}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">System RAM</span>
+                                                    <span class="adm-val" id="admMemSys">{{.MemSys}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Host RAM</span>
+                                                    <span class="adm-val" id="admHostMem">{{.SysMemUsed}} / {{.SysMemTotal}} ({{.SysMemPct}})</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Goroutines</span>
+                                                    <span class="adm-val" id="admGoroutines">{{.NumGoroutines}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">GC Cycles</span>
+                                                    <span class="adm-val" id="admGcCycles">{{.NumGC}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="adm-card">
+                                            <div class="adm-cardhdr">
+                                                <h3 class="adm-cardttl">
+                                                    <i class="fa-solid fa-database"></i>
+                                                    <span>Database</span>
+                                                </h3>
+                                                {{if .DBConnected}}
+                                                <span class="adm-stat"><span class="adm-ind adm-ind-online"></span>Connected</span>
+                                                {{else}}
+                                                <span class="adm-stat"><span class="adm-ind adm-ind-offline"></span>Offline</span>
+                                                {{end}}
+                                            </div>
+                                            <div class="adm-rowlst">
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Max Conns</span>
+                                                    <span class="adm-val">{{.DBMaxOpen}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Open Conns</span>
+                                                    <span class="adm-val">{{.DBOpenConns}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Active and Idle</span>
+                                                    <span class="adm-val">{{.DBInUse}} active / {{.DBIdle}} idle</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Waits</span>
+                                                    <span class="adm-val">{{.DBWaitCount}} ({{.DBWaitDuration}})</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="adm-card">
+                                            <div class="adm-cardhdr">
+                                                <h3 class="adm-cardttl">
+                                                    <i class="fa-solid fa-cubes"></i>
+                                                    <span>Engine</span>
+                                                </h3>
+                                            </div>
+                                            <div class="adm-rowlst">
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Go Version</span>
+                                                    <span class="adm-val">{{.GoVersion}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">OS Arch</span>
+                                                    <span class="adm-val">{{.OSArch}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Total Users</span>
+                                                    <span class="adm-val highlight">{{.UserCount}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Games</span>
+                                                    <span class="adm-val">{{.GameCount}}</span>
+                                                </div>
+                                                <div class="adm-row">
+                                                    <span class="adm-lbl">Live Event</span>
+                                                    <span class="adm-val">{{if .LiveTimerActive}}<span class="adm-stat"><span class="adm-ind adm-ind-online"></span>On{{else}}Off{{end}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tab-users" class="settabcntnt">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Users</h3>
+
+                                    <div class="adm-fltrbar">
+                                        <div class="setinbox adm-searchbox">
+                                            <input type="text" id="admUserSearch" class="setin" placeholder="Search users" oninput="window.fetchAdminUsers(1)" autocomplete="off">
+                                        </div>
+                                        <div class="glb-dropdown adm-role-dropdown" id="admRoleDropdown">
+                                            <button type="button" class="glb-dropdown-trigger" id="admRoleTrigger" onclick="window.toggleGlobalDropdown('admRoleDropdown')">
+                                                <span id="admRoleLabel" class="glb-dropdown-label">All Roles</span>
+                                                <svg class="glb-dropdown-arrow" viewBox="0 0 292.4 292.4">
+                                                    <path fill="currentColor" d="M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="glb-dropdown-menu" id="admRoleMenu">
+                                                <div class="glb-dropdown-item active" data-value="-1" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '-1', 'All Roles', window.onAdminRoleSelect)">All Roles</div>
+                                                <div class="glb-dropdown-item" data-value="0" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '0', 'Member', window.onAdminRoleSelect)">Member</div>
+                                                <div class="glb-dropdown-item" data-value="1" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '1', 'Trainee', window.onAdminRoleSelect)">Trainee</div>
+                                                <div class="glb-dropdown-item" data-value="2" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '2', 'Moderator', window.onAdminRoleSelect)">Moderator</div>
+                                                <div class="glb-dropdown-item" data-value="3" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '3', 'Head Manager', window.onAdminRoleSelect)">Head Manager</div>
+                                                <div class="glb-dropdown-item" data-value="4" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '4', 'Buildoverse Team', window.onAdminRoleSelect)">Buildoverse Team</div>
+                                                <div class="glb-dropdown-item" data-value="5" onclick="window.selectGlobalDropdownOption('admRoleDropdown', '5', 'Owner', window.onAdminRoleSelect)">Owner</div>
+                                            </div>
+                                            <input type="hidden" id="admRoleFilter" value="-1">
+                                        </div>
+                                    </div>
+
+                                    <div id="admUserListContainer">
+                                        <div class="frngrd" id="admUsersGrid">
+                                            {{range .Users}}
+                                            <div class="frncrd">
+                                                <div class="frntop">
+                                                    <a href="/user/{{.ID}}" hx-get="/user/{{.ID}}" hx-target="body" hx-push-url="true" class="frnavt">
+                                                        <img src="/api/v1/avatar/headshot/{{.ID}}.png" onerror="this.src='/static/useful/temp/pfp.png';" alt="{{.Username}}">
+                                                    </a>
+                                                    <div class="frndtl">
+                                                        <a href="/user/{{.ID}}" hx-get="/user/{{.ID}}" hx-target="body" hx-push-url="true" class="frndn">{{.DisplayName}}</a>
+                                                        <span class="frnun">@{{.Username}} #{{.ID}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="adm-crdmeta">
+                                                    <span class="adm-badge adm-badge-{{if eq .RoleName "head manager"}}head-manager{{else if eq .RoleName "Buildoverse-team"}}Buildoverse-team{{else}}{{.RoleName}}{{end}}">{{.RoleDisplay}}</span>
+                                                    <span>Joined {{.CreationDate}}</span>
+                                                </div>
+                                                <div class="frnact">
+                                                    <button type="button" class="primary hpyprim hpyinl hpysm" onclick="window.viewAdminUser({{.ID}})">
+                                                        <span>View User</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            {{else}}
+                                            <div class="frnemt adm-emt">No users found</div>
+                                            {{end}}
+                                        </div>
+                                    </div>
+
+                                    <div class="adm-pgncnt">
+                                        <span class="adm-pgntxt" id="admPgnTxt">Page 1 of 1</span>
+                                        <div class="adm-pgnbtns">
+                                            <button type="button" class="primary hpyprim hpyinl hpysm" id="admPrevBtn" onclick="window.fetchAdminUsers(currentAdminUserPage - 1)" disabled>
+                                                <span>Prev</span>
+                                            </button>
+                                            <button type="button" class="primary hpyprim hpyinl hpysm" id="admNextBtn" onclick="window.fetchAdminUsers(currentAdminUserPage + 1)">
+                                                <span>Next</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tab-reports" class="settabcntnt">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Reports</h3>
+                                </div>
+                            </div>
+
+                            <div id="tab-assets" class="settabcntnt">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Asset Approvals</h3>
+
+                                    <div class="adm-fltrbar">
+                                        <div class="tabcnt settabcnt adm-cat-tabs" style="margin: 0 !important; max-width: 100% !important;">
+                                            <div class="tablst">
+                                                <div class="tabind"></div>
+                                                <button type="button" class="tabbtn active" data-category="" onclick="window.filterAdminAssetCategory('', event)">All</button>
+                                                <button type="button" class="tabbtn" data-category="image" onclick="window.filterAdminAssetCategory('image', event)">Images</button>
+                                                <button type="button" class="tabbtn" data-category="mesh" onclick="window.filterAdminAssetCategory('mesh', event)">Meshes</button>
+                                                <button type="button" class="tabbtn" data-category="sound" onclick="window.filterAdminAssetCategory('sound', event)">Sounds</button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="admAssetFilter" value="">
+                                        <input type="hidden" name="csrf" value="{{.CSRF}}" id="admAssetsCsrf">
+                                    </div>
+
+                                    <div id="admAssetListContainer">
+                                        <div class="adm-grid" id="admAssetsGrid">
+                                            {{range .Assets}}
+                                            <div class="adm-card" data-id="{{.ID}}">
+                                                <div class="adm-cardhdr">
+                                                    <h3 class="adm-cardttl">
+                                                        <i class="fa-solid {{if eq .Type "image"}}fa-image{{else if eq .Type "mesh"}}fa-cube{{else}}fa-music{{end}}"></i>
+                                                        <span>{{.Name}}</span>
+                                                    </h3>
+                                                    <span class="adm-badge adm-badge-{{.Type}}">{{.TypeName}}</span>
+                                                </div>
+                                                <div class="adm-rendcrd">
+                                                    {{if eq .Type "image"}}
+                                                    <img src="/api/v1/assets/{{.ID}}/file" alt="{{.Name}}" class="adm-rendimg" loading="lazy" onerror="this.src='/static/useful/temp/pfp.png';">
+                                                    {{else if eq .Type "sound"}}
+                                                    <div class="adm-audio-wrap">
+                                                        <i class="fa-solid fa-music adm-audio-ico"></i>
+                                                        <audio controls src="/api/v1/assets/{{.ID}}/file" class="adm-audio-player"></audio>
+                                                    </div>
+                                                    {{else}}
+                                                    <img src="/api/v1/assets/{{.ID}}/render" alt="{{.Name}}" class="adm-rendimg" loading="lazy" onerror="this.src='/static/useful/temp/pfp.png';">
+                                                    <button type="button" class="adm-3d-toggle-btn" data-filepath="{{.FilePath}}" onclick="window.toggleAdminMesh3D({{.ID}}, this)" title="3D Preview">
+                                                        <i class="fa-solid fa-cube"></i>
+                                                        <span>3D</span>
+                                                    </button>
+                                                    {{end}}
+                                                </div>
+                                                <div class="adm-rowlst">
+                                                    <div class="adm-row"><span class="adm-lbl">Owner</span><span class="adm-val"><a href="/user/{{.UID}}" hx-get="/user/{{.UID}}" hx-target="body" hx-push-url="true" class="adm-owner-link">@{{.OwnerName}}</a></span></div>
+                                                    <div class="adm-row"><span class="adm-lbl">Submitted</span><span class="adm-val">{{.CreatedAt.Format "Jan 02, 2006 15:04"}}</span></div>
+                                                    {{if .Description}}
+                                                    <div class="adm-row"><span class="adm-lbl">Description</span><span class="adm-val">{{.Description}}</span></div>
+                                                    {{end}}
+                                                </div>
+                                                <div class="adm-modbtns">
+                                                    <button type="button" class="primary hpysuc hpyinl hpysm" onclick="window.reviewAdminAsset({{.ID}}, 'approve')">
+                                                        <span>Approve</span>
+                                                    </button>
+                                                    <button type="button" class="primary hpydng hpyinl hpysm" onclick="window.promptRejectAsset({{.ID}}, '{{.Name}}')">
+                                                        <span>Reject</span>
+                                                    </button>
+                                                    <a href="/api/v1/assets/{{.ID}}/file" target="_blank" rel="noopener" class="primary hpyinf hpyinl hpysm" style="text-decoration: none;">
+                                                        <span>Download</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {{else}}
+                                            <div class="frnemt adm-emt">No assets awaiting review</div>
+                                            {{end}}
+                                        </div>
+                                    </div>
+
+                                    <div class="adm-pgncnt">
+                                        <span class="adm-pgntxt" id="admAssetsPgnTxt">Page 1 of {{.TotalAssetPages}}</span>
+                                        <div class="adm-pgnbtns">
+                                            <button type="button" class="primary hpyprim hpyinl hpysm" id="admAssetsPrevBtn" onclick="window.fetchAdminAssets(currentAdminAssetPage - 1)" disabled>
+                                                <span>Prev</span>
+                                            </button>
+                                            <button type="button" class="primary hpyprim hpyinl hpysm" id="admAssetsNextBtn" onclick="window.fetchAdminAssets(currentAdminAssetPage + 1)">
+                                                <span>Next</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tab-logs" class="settabcntnt">
+                                <div class="setcrd">
+                                    <h3 class="setttl">Logs</h3>
+
+                                    <div class="adm-tblcnt">
+                                        <table class="adm-usrtbl">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Admin</th>
+                                                    <th>Action</th>
+                                                    <th>Target</th>
+                                                    <th>Reason</th>
+                                                    <th>Status</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="admLogsBody">
+                                                {{range .Logs}}
+                                                <tr>
+                                                    <td>#{{.ID}}</td>
+                                                    <td>{{.AdminName}}</td>
+                                                    <td><strong class="adm-act">{{.ActionLabel}}</strong></td>
+                                                    <td>@{{.TargetName}} #{{.UID}}</td>
+                                                    <td>{{.Reason}}</td>
+                                                    <td>
+                                                        {{if eq .Status "active"}}
+                                                        <span class="adm-stat"><span class="adm-ind adm-ind-offline"></span>{{.StatusLabel}}</span>
+                                                        {{else}}
+                                                        <span class="adm-stat"><span class="adm-ind adm-ind-online"></span>{{.StatusLabel}}</span>
+                                                        {{end}}
+                                                    </td>
+                                                    <td>{{.CreationDate.Format "Jan 02, 2006 15:04"}}</td>
+                                                </tr>
+                                                {{else}}
+                                                <tr>
+                                                    <td colspan="7" class="adm-tblemt">No admin actions logged</td>
+                                                </tr>
+                                                {{end}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="adm-pgncnt">
+                                        <span class="adm-pgntxt" id="admLogsPgnTxt">Page 1 of {{.TotalLogPages}}</span>
+                                        <div class="adm-pgnbtns">
+                                            <button type="button" class="primary hpyprim hpyinl hpysm" id="admLogsPrevBtn" onclick="window.fetchAdminLogs(currentAdminLogsPage - 1)" disabled>
+                                                <span>Prev</span>
+                                            </button>
+                                            <button type="button" class="primary hpyprim hpyinl hpysm" id="admLogsNextBtn" onclick="window.fetchAdminLogs(currentAdminLogsPage + 1)">
+                                                <span>Next</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/elements/modal.js"></script>
+<script src="/static/js/admin/admin.js"></script>

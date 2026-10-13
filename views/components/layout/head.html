@@ -1,0 +1,72 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{.Title}}</title>
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.185.1/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.1/examples/jsm/"
+    }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/static/css/gen.css">
+<link rel="stylesheet" href="/static/css/nav.css">
+<link rel="stylesheet" href="/static/css/mus.css">
+<link rel="stylesheet" href="/static/css/shop.css">
+<link rel="stylesheet" href="/static/css/search.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.7/htmx.min.js" integrity="sha512-IisGoumHahmfNIhP4wUV3OhgQZaaDBuD6IG4XlyjT77IUkwreZL3T3afO4xXuDanSalZ57Un+UlAbarQjNZCTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5.5.2/dist/iro.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/static/js/elements/colorpicker.js"></script>
+<script src="/static/js/elements/music.js"></script>
+<script src="/static/js/elements/dropdown.js"></script>
+<script src="/static/js/elements/search.js"></script>
+<script>
+    setInterval(function () {
+        fetch('/heartbeat', { credentials: 'same-origin' }).catch(function () {});
+    }, 20000);
+</script>
+<script>
+    if (/Android|iPhone|iPod/i.test(navigator.userAgent)) {
+        document.documentElement.classList.add('mobmode');
+    } else if (/iPad|Tablet/i.test(navigator.userAgent)) {
+    }
+
+    let isReload = false;
+    if (window.performance && window.performance.getEntriesByType) {
+        const navEntries = window.performance.getEntriesByType('navigation');
+        if (navEntries.length > 0 && navEntries[0].type === 'reload') {
+            isReload = true;
+        }
+    }
+
+    if (isReload) {
+        sessionStorage.removeItem('alreadyLoaded');
+    }
+
+    if (!isReload && sessionStorage.getItem('alreadyLoaded') === 'true') {
+        document.documentElement.classList.add('notreq');
+    } else {
+        setTimeout(function() {
+            document.documentElement.classList.add('notreq');
+            sessionStorage.setItem('alreadyLoaded', 'true');
+        }, 1500);
+    }
+
+    document.addEventListener('htmx:beforeTransition', function() {
+        document.documentElement.classList.add('notreq');
+        sessionStorage.setItem('alreadyLoaded', 'true');
+    });
+</script>
+<style>
+    html.notreq .navlnk,
+    html.notreq .sbtn,
+    html.notreq .pfpbtn,
+    html.notreq .navbrd,
+    html.notreq .navdiv {
+        animation: none !important;
+    }
+</style>

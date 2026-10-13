@@ -1,0 +1,517 @@
+.adm-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-top: 16px !important;
+}
+
+.adm-card {
+    background: #FAFAFA !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    box-sizing: border-box !important;
+}
+
+.adm-cardhdr {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    border-bottom: 1px solid #E0E0E0 !important;
+    padding-bottom: 10px !important;
+}
+
+.adm-cardttl {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #912ADF !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.adm-cardttl i {
+    font-size: 14px !important;
+}
+
+.adm-stat {
+    display: inline-flex !important;
+    align-items: center !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #3D3D3D !important;
+    white-space: nowrap !important;
+}
+
+.adm-rowlst {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.adm-rowlst-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 10px 24px !important;
+}
+
+.adm-row {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+}
+
+.adm-outfitrow {
+    align-items: center !important;
+}
+
+.adm-outfitimg {
+    width: 56px !important;
+    height: 56px !important;
+    object-fit: contain !important;
+    background: #E0E0E0 !important;
+    border: 2px solid #C1C1C1 !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
+}
+
+.adm-lbl {
+    color: #718096 !important;
+    font-weight: 400 !important;
+    flex-shrink: 0 !important;
+}
+
+.adm-val {
+    color: #3D3D3D !important;
+    font-weight: 500 !important;
+    font-variant-numeric: tabular-nums !important;
+    text-align: right !important;
+    word-break: break-word !important;
+}
+
+.adm-owner-link {
+    color: #912ADF !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.adm-owner-link:hover {
+    text-decoration: underline !important;
+}
+
+.adm-val.highlight {
+    color: #912ADF !important;
+    font-weight: 500 !important;
+}
+
+.adm-ind {
+    display: inline-block !important;
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    margin-right: 6px !important;
+    flex-shrink: 0 !important;
+}
+
+.adm-ind-online {
+    background-color: #28A745 !important;
+}
+
+.adm-ind-offline {
+    background-color: #DC3545 !important;
+}
+
+.adm-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #FFFFFF !important;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: inset 0px 0px 4px rgba(255, 255, 255, 0.25) !important;
+    white-space: nowrap !important;
+}
+
+.adm-badge-owner {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #7423CB !important;
+}
+
+.adm-badge-buildoverse-team {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #17A2B8 !important;
+}
+
+.adm-badge-head-manager {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #E67E22 !important;
+}
+
+.adm-badge-moderator {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #28A745 !important;
+}
+
+.adm-badge-trainee {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #718096 !important;
+}
+
+.adm-badge-member {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #888888 !important;
+}
+
+.adm-badge-image {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #28A745 !important;
+}
+
+.adm-badge-mesh {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #17A2B8 !important;
+}
+
+.adm-badge-sound {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #E67E22 !important;
+}
+
+.adm-badge-approved {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #28A745 !important;
+}
+
+.adm-badge-pending {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #E67E22 !important;
+}
+
+.adm-badge-rejected {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #DC3545 !important;
+}
+
+.adm-crdmeta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 12px !important;
+    color: #718096 !important;
+}
+
+.adm-emt {
+    grid-column: 1 / -1 !important;
+}
+
+.adm-fltrbar {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 16px !important;
+    width: 100% !important;
+}
+
+.adm-cat-tabs {
+    flex: 0 1 auto !important;
+}
+
+.adm-cat-tabs .tablst {
+    position: static !important;
+}
+
+.adm-searchbox {
+    flex: 1 1 240px !important;
+    min-width: 200px !important;
+    height: 36px !important;
+}
+
+.adm-searchbox .setin {
+    font-size: 13px !important;
+    line-height: 36px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+}
+
+.adm-role-dropdown {
+    width: 160px !important;
+    flex: 0 1 auto !important;
+}
+
+.adm-role-dropdown .glb-dropdown-trigger {
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    font-size: 13px !important;
+    padding: 0 10px !important;
+}
+
+.adm-select {
+    height: 36px !important;
+    min-width: 160px !important;
+    flex: 0 1 auto !important;
+    background-color: #E0E0E0 !important;
+    border: 2px solid rgba(61, 61, 61, 0.25) !important;
+    border-radius: 6px !important;
+    padding: 0 28px 0 10px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #3D3D3D !important;
+    outline: none !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23718096%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    background-size: 9px auto !important;
+}
+
+.adm-select:focus {
+    border-color: rgba(61, 61, 61, 0.25) !important;
+}
+
+.adm-select option {
+    background-color: #FAFAFA !important;
+    color: #3D3D3D !important;
+}
+
+.adm-panel {
+    background: #FAFAFA !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+}
+
+.adm-rendsec {
+    max-width: 340px !important;
+}
+
+.adm-rendcrd {
+    position: relative !important;
+    width: 100% !important;
+    height: 330px !important;
+    background: #E0E0E0 !important;
+    border: 2px solid #C1C1C1 !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.adm-rendimg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15)) !important;
+}
+
+.adm-3d-canvas-wrap {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+    inset: 0 !important;
+    cursor: grab !important;
+    touch-action: none !important;
+}
+
+.adm-3d-canvas-wrap:active {
+    cursor: grabbing !important;
+}
+
+.adm-3d-toggle-btn {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    z-index: 5 !important;
+    height: 28px !important;
+    padding: 0 10px !important;
+    background: rgba(61, 61, 61, 0.75) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 6px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    transform: scale(1) !important;
+    transition: background 0.15s ease, transform 0.15s ease !important;
+}
+
+.adm-3d-toggle-btn:hover {
+    background: rgba(116, 35, 203, 0.85) !important;
+    transform: scale(1.05) !important;
+}
+
+.adm-3d-toggle-btn.active {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 2.18%, rgba(255, 255, 255, 0.39) 91.46%), #7423CB !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.adm-3d-err {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+    color: #DC3545 !important;
+    padding: 16px !important;
+    text-align: center !important;
+}
+
+.adm-audio-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    width: 100% !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+.adm-audio-ico {
+    font-size: 48px !important;
+    color: #C1C1C1 !important;
+}
+
+.adm-audio-player {
+    width: 100% !important;
+    max-width: 280px !important;
+}
+
+.adm-tblcnt {
+    width: 100% !important;
+    overflow-x: auto !important;
+    background: #FAFAFA !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+}
+
+.adm-usrtbl {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+}
+
+.adm-usrtbl th {
+    text-align: left !important;
+    padding: 10px 14px !important;
+    background: #E0E0E0 !important;
+    color: #718096 !important;
+    font-weight: 500 !important;
+    border-bottom: 2px solid #C1C1C1 !important;
+    white-space: nowrap !important;
+}
+
+.adm-usrtbl td {
+    padding: 10px 14px !important;
+    border-bottom: 1px solid #E0E0E0 !important;
+    color: #3D3D3D !important;
+    vertical-align: middle !important;
+}
+
+.adm-usrtbl tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.adm-usrtbl tr:hover td {
+    background: #F0F0F0 !important;
+}
+
+.adm-tblemt {
+    text-align: center !important;
+    padding: 20px !important;
+    color: #718096 !important;
+}
+
+.adm-act {
+    text-transform: capitalize !important;
+}
+
+.adm-pgncnt {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+    margin-top: 16px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #E0E0E0 !important;
+}
+
+.adm-pgntxt {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 13px !important;
+    color: #718096 !important;
+}
+
+.adm-pgnbtns {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.adm-modact {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+}
+
+.adm-modreason {
+    max-width: 420px !important;
+}
+
+.adm-modbtns {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.adm-usrtbl td .primary {
+    white-space: nowrap !important;
+}
+
+@media (max-width: 768px) {
+    .adm-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .adm-rendsec {
+        max-width: 100% !important;
+    }
+    .adm-fltrbar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+    }
+    .adm-select {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    .adm-role-dropdown {
+        width: 100% !important;
+    }
+    .adm-searchbox {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+}

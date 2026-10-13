@@ -1,0 +1,81 @@
+<div class="shp-fltrcard">
+    <button type="button" class="shp-fltrhdr" onclick="window.toggleShopFilterSidebar()" title="Toggle filter">
+        <i class="fa-solid fa-sliders shp-fltrhdr-ico"></i>
+        <span class="shp-fltrhdr-txt">Filter</span>
+    </button>
+
+    <div class="shp-fltrbody" id="shpFltrBody">
+        <div class="shp-fltrgrp">
+            <label class="shp-fltrlbl">Currency</label>
+            <div class="crttype shp-currency-pills">
+                <button type="button" class="crttypebtn{{if or (eq .Filter.Currency "all") (eq .Filter.Currency "")}} active{{end}}" data-currency="all" onclick="window.selectShopCurrencyPill('all', this)">
+                    All
+                </button>
+                <button type="button" class="crttypebtn{{if eq .Filter.Currency "free"}} active{{end}}" data-currency="free" onclick="window.selectShopCurrencyPill('free', this)">
+                    Free
+                </button>
+                <button type="button" class="crttypebtn{{if or (eq .Filter.Currency "vertices") (eq .Filter.Currency "bucks")}} active{{end}}" data-currency="vertices" onclick="window.selectShopCurrencyPill('vertices', this)">
+                    <img src="/static/useful/icons/verticec.png" class="shp-currency-btn-ico" alt=""> Vertices
+                </button>
+                <button type="button" class="crttypebtn{{if or (eq .Filter.Currency "tickets") (eq .Filter.Currency "bits")}} active{{end}}" data-currency="tickets" onclick="window.selectShopCurrencyPill('tickets', this)">
+                    <img src="/static/useful/icons/ticketc.png" class="shp-currency-btn-ico" alt=""> Tickets
+                </button>
+            </div>
+        </div>
+
+        <div class="shp-fltrgrp">
+            <label class="shp-fltrlbl">Price Range</label>
+            <div class="shp-price-inputs">
+                <div class="setinbox shp-fltrbox" style="flex: 1;">
+                    <input type="number" id="shopMinPrice" class="setin shp-fltrin" placeholder="Min" min="0" value="{{if gt .Filter.MinPrice 0}}{{.Filter.MinPrice}}{{end}}" onchange="window.fetchShopItems(1)">
+                </div>
+                <span class="shp-price-sep">-</span>
+                <div class="setinbox shp-fltrbox" style="flex: 1;">
+                    <input type="number" id="shopMaxPrice" class="setin shp-fltrin" placeholder="Max" min="0" value="{{if gt .Filter.MaxPrice 0}}{{.Filter.MaxPrice}}{{end}}" onchange="window.fetchShopItems(1)">
+                </div>
+            </div>
+        </div>
+
+        <div class="shp-fltrgrp">
+            <label class="shp-fltrlbl" for="shopCreatorInput">Creator</label>
+            <div class="setinbox shp-fltrbox">
+                <input type="text" id="shopCreatorInput" class="setin shp-fltrin" placeholder="Creator username" value="{{.Filter.Creator}}" onchange="window.fetchShopItems(1)" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="shp-fltrgrp">
+            <label class="shp-fltrlbl">Sort By</label>
+            <div class="glb-dropdown" id="shopSortDropdown">
+                <button type="button" class="glb-dropdown-trigger" id="shopSortTrigger" onclick="window.toggleGlobalDropdown('shopSortDropdown')">
+                    <span id="shopSortLabel" class="glb-dropdown-label">
+                        {{if eq .Filter.Sort "oldest"}}Oldest
+                        {{else if or (eq .Filter.Sort "popular") (eq .Filter.Sort "bestselling")}}Bestselling
+                        {{else if eq .Filter.Sort "price_asc"}}Price: Low to High
+                        {{else if eq .Filter.Sort "price_desc"}}Price: High to Low
+                        {{else}}Newest{{end}}
+                    </span>
+                    <svg class="glb-dropdown-arrow" viewBox="0 0 292.4 292.4">
+                        <path fill="currentColor" d="M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z"/>
+                    </svg>
+                </button>
+                <div class="glb-dropdown-menu" id="shopSortMenu">
+                    <div class="glb-dropdown-item{{if or (eq .Filter.Sort "newest") (eq .Filter.Sort "")}} active{{end}}" data-value="newest" onclick="window.selectGlobalDropdownOption('shopSortDropdown', 'newest', 'Newest')">Newest</div>
+                    <div class="glb-dropdown-item{{if eq .Filter.Sort "oldest"}} active{{end}}" data-value="oldest" onclick="window.selectGlobalDropdownOption('shopSortDropdown', 'oldest', 'Oldest')">Oldest</div>
+                    <div class="glb-dropdown-item{{if or (eq .Filter.Sort "popular") (eq .Filter.Sort "bestselling")}} active{{end}}" data-value="popular" onclick="window.selectGlobalDropdownOption('shopSortDropdown', 'popular', 'Bestselling')">Bestselling</div>
+                    <div class="glb-dropdown-item{{if eq .Filter.Sort "price_asc"}} active{{end}}" data-value="price_asc" onclick="window.selectGlobalDropdownOption('shopSortDropdown', 'price_asc', 'Price: Low to High')">Price: Low to High</div>
+                    <div class="glb-dropdown-item{{if eq .Filter.Sort "price_desc"}} active{{end}}" data-value="price_desc" onclick="window.selectGlobalDropdownOption('shopSortDropdown', 'price_desc', 'Price: High to Low')">Price: High to Low</div>
+                </div>
+                <input type="hidden" id="shopSortSelect" value="{{if .Filter.Sort}}{{.Filter.Sort}}{{else}}newest{{end}}">
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 6px; margin-top: 2px;">
+            <button type="button" class="primary hpyprim hpyinl hpysm" style="flex: 1; height: 30px !important;" onclick="window.fetchShopItems(1)">
+                <span>Apply</span>
+            </button>
+            <button type="button" class="primary hpyerr hpyinl hpysm" style="height: 30px !important;" onclick="window.resetShopFilters()">
+                <span>Reset</span>
+            </button>
+        </div>
+    </div>
+</div>

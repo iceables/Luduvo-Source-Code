@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Register</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/login" hx-target="body" hx-push-url="true" class="button barbtn">Login</button>
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="frmlay">
+                <div class="frmmain">
+                    <h2 class="frmttl">Create Account</h2>
+                    <form action="/register" method="POST" hx-boost="false" data-captcha>
+                        <div class="frmgrp">
+                            <div class="frmincnt">
+                                <input type="text" name="username" class="frmin" placeholder="Username" required>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="frmhlp">3-25 alphanumeric characters</span>
+                        </div>
+                        <div class="frmgrp">
+                            <div class="frmincnt">
+                                <input type="email" name="email" class="frmin" placeholder="Email" required>
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <span class="frmhlp">Used for account recovery</span>
+                        </div>
+                        <div class="frmgrp">
+                            <div class="frmincnt">
+                                <input type="password" name="password" class="frmin" placeholder="Password" required>
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                            <span class="frmhlp">Min 8 characters</span>
+                        </div>
+                        <div class="frmgrp">
+                            <div class="frmincnt">
+                                <input type="password" name="password_confirm" class="frmin" placeholder="Confirm Password" required>
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                        </div>
+                        <label class="frmchkgrp">
+                            <input type="checkbox" required>
+                            <span>I agree to the <a href="/tos" hx-get="/tos" hx-target="body" hx-push-url="true">Terms of Service</a></span>
+                        </label>
+                        <div style="margin-bottom: 20px;">
+                            <p data-captcha-status style="font-size:13px;margin:0">The check runs when you submit. Email is verified automatically.</p>
+                        </div>
+                        <div>
+                            <button type="submit" class="primary" style="position: relative; left: auto; top: auto; display: inline-flex;">
+                                <span>Sign Up</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="frmsbar regsbar">
+                    <div class="regartwrap">
+                        <div class="ttpcnt regartbox">
+                            <div class="regarttxt">Join <strong>{{.UserCount}}+</strong> users creating</div>
+                            <img src="/static/useful/pages/auth/ohnoart.png" alt="Buildoverse Art" class="regartimg">
+                            <span class="ttptxt">Art by no0<br>Avatar by okAsk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{if .Error}}
+<script>
+    (function() {
+        var err = "{{.Error}}";
+        var field = "{{.ErrorField}}";
+        if (!err) return;
+
+        function showErrorUnder(element, message) {
+            if (!element) return;
+            var group = element.closest('.frmgrp') || element.parentElement;
+            var errDiv = group.querySelector('.frminerr');
+            if (!errDiv) {
+                errDiv = document.createElement('span');
+                errDiv.className = 'frminerr';
+                group.appendChild(errDiv);
+            }
+            errDiv.textContent = message;
+            requestAnimationFrame(function() {
+                errDiv.classList.add('visible');
+            });
+        }
+
+        function markField(selector) {
+            var input = document.querySelector(selector);
+            if (input) input.classList.add('inerr');
+        }
+
+        if (field === 'username') {
+            markField('input[name="username"]');
+            showErrorUnder(document.querySelector('input[name="username"]'), err);
+        } else if (field === 'email') {
+            markField('input[name="email"]');
+            showErrorUnder(document.querySelector('input[name="email"]'), err);
+        } else if (field === 'password') {
+            markField('input[name="password"]');
+            showErrorUnder(document.querySelector('input[name="password"]'), err);
+        } else if (field === 'passwordconfirm') {
+            markField('input[name="password"]');
+            markField('input[name="password_confirm"]');
+            showErrorUnder(document.querySelector('input[name="password"]'), err);
+        } else if (field === 'captcha') {
+            var widget = document.querySelector('altcha-widget');
+            if (widget) {
+                widget.style.border = "1px solid #ff3b30";
+                widget.style.borderRadius = "8px";
+                widget.style.padding = "4px";
+                showErrorUnder(widget, err);
+            }
+        } else {
+            document.querySelectorAll('input[name="username"], input[name="email"], input[name="password"], input[name="password_confirm"]').forEach(function(input) {
+                input.classList.add('inerr');
+            });
+            showErrorUnder(document.querySelector('input[name="username"]'), err);
+        }
+    })();
+</script>
+{{end}}
+<script src="/static/js/captcha.js"></script>

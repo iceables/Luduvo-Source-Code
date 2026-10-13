@@ -1,0 +1,109 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Login</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/register" hx-target="body" hx-push-url="true" class="button barbtn">Register</button>
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="frmlay">
+                <div class="frmmain">
+                    <h2 class="frmttl">Log In</h2>
+                    <form action="/login" method="POST" hx-boost="false" data-captcha>
+                        <div class="frmgrp">
+                            <div class="frmincnt">
+                                <input type="text" name="identifier" class="frmin" placeholder="Username or Email" required>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="frmgrp">
+                            <div class="frmincnt">
+                                <input type="password" name="password" class="frmin" placeholder="Password" required>
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; margin-bottom: 20px;">
+                            <p data-captcha-status style="font-size:13px;margin:0">The check runs when you submit.</p>
+                        </div>
+                        <div>
+                            <button type="submit" class="primary" style="position: relative; left: auto; top: auto; display: inline-flex;">
+                                <span>Log In</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="frmsbar">
+                    <div class="frmsbarsec">
+                        <h3 class="frmsbarttl">Security Tips</h3>
+                        <ul class="frmsbarlst">
+                            <li>Always verify you are on Buildoverse.</li>
+                            <li>Never share your credentials with anyone.</li>
+                            <li>Enable verification methods in settings.</li>
+                        </ul>
+                    </div>
+                    <div class="frmsbarsec">
+                        <h3 class="frmsbarttl">Don't have an account?</h3>
+                        <p style="font-family: 'Ubuntu', sans-serif; font-size: 14px; color: #444444; line-height: 1.4; margin: 0;">
+                            Join Buildoverse to experience avatars, forums, and custom clans! <a href="/register" hx-get="/register" hx-target="body" hx-push-url="true" class="frmsbarlnk">Register here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{if .Error}}
+<script>
+    (function() {
+        var err = "{{.Error}}";
+        var field = "{{.ErrorField}}";
+        if (!err) return;
+
+        function showErrorUnder(element, message) {
+            if (!element) return;
+            var group = element.closest('.frmgrp') || element.parentElement;
+            var errDiv = group.querySelector('.frminerr');
+            if (!errDiv) {
+                errDiv = document.createElement('span');
+                errDiv.className = 'frminerr';
+                group.appendChild(errDiv);
+            }
+            errDiv.textContent = message;
+            requestAnimationFrame(function() {
+                errDiv.classList.add('visible');
+            });
+        }
+
+        function markField(selector) {
+            var input = document.querySelector(selector);
+            if (input) input.classList.add('inerr');
+        }
+
+        if (field === 'captcha') {
+            var widget = document.querySelector('altcha-widget');
+            if (widget) {
+                widget.style.border = "1px solid #ff3b30";
+                widget.style.borderRadius = "8px";
+                widget.style.padding = "4px";
+                showErrorUnder(widget, err);
+            }
+        } else if (field === 'credentials') {
+            markField('input[name="identifier"]');
+            markField('input[name="password"]');
+            showErrorUnder(document.querySelector('input[name="identifier"]'), err);
+        } else {
+            markField('input[name="identifier"]');
+            showErrorUnder(document.querySelector('input[name="identifier"]'), err);
+        }
+    })();
+</script>
+{{end}}
+<script src="/static/js/captcha.js"></script>

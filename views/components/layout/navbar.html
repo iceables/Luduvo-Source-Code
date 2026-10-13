@@ -1,0 +1,27 @@
+<nav class="navcnt">
+    <!--  TODO make this play ONCE (first visit) and upon future theme change ///  -->
+    <a href="/" hx-get="/" hx-target="body" hx-push-url="true" class="navbrd" aria-label="Buildoverse Home"></a>
+    <a href="/" hx-get="/" hx-target="body" hx-push-url="true" class="navlnk navhome">Home</a>
+    <div class="navdiv"></div>
+    <a href="/play" hx-get="/play" hx-target="body" hx-push-url="true" class="navlnk navplay">Play</a>
+    <div class="navdiv"></div>
+    <a href="/shop" hx-get="/shop" hx-target="body" hx-push-url="true" class="navlnk navshop">Shop</a>
+    <div class="navdiv"></div>
+    <a href="/users" hx-get="/users" hx-target="body" hx-push-url="true" class="navlnk navusers">Users</a>
+    <div class="navdiv"></div>
+    <a href="/clans" hx-get="/clans" hx-target="body" hx-push-url="true" class="navlnk navclans">Clans</a>
+    <div class="navdiv"></div>
+    <a href="/forum" hx-get="/forum" hx-target="body" hx-push-url="true" class="navlnk navforum">Forum</a>
+    <div class="navdiv"></div>
+    <a href="/upgrade" hx-get="/upgrade" hx-target="body" hx-push-url="true" class="navlnk navupg">Upgrade</a>
+    
+    {{if .IsLoggedIn}}
+        {{template "components/layout/usersidebar" .}}
+    {{else}}
+        <div class="sbar" style="justify-content: flex-end; width: auto; right: 15px; left: auto; gap: 15px;">
+            <a href="/register" hx-get="/register" hx-target="body" hx-push-url="true" class="navlnk" style="width: auto;">Register</a>
+            <div class="navdiv" style="height: 18px; margin: 0;"></div>
+            <a href="/login" hx-get="/login" hx-target="body" hx-push-url="true" class="navlnk" style="width: auto;">Login</a>
+        </div>
+    {{end}}
+</nav>

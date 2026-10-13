@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/static/css/forms.css">
+<link rel="stylesheet" href="/static/css/inputs.css">
+<link rel="stylesheet" href="/static/css/set.css">
+<link rel="stylesheet" href="/static/css/dash.css">
+<link rel="stylesheet" href="/static/css/mus.css">
+<div class="wrap">
+    <div class="cont">
+        <div class="studs"></div>
+        <div class="bar">
+            <span class="title">Settings</span>
+            <div class="pill">
+                <img src="/static/useful/icons/search.png" class="icon" alt="Search">
+                <input type="text" class="input" placeholder="search">
+            </div>
+            <div class="barbtns">
+                <button hx-get="/" hx-target="body" hx-push-url="true" class="button barbtn">Go back</button>
+            </div>
+        </div>
+        <div class="pane">
+            <div class="frmlay">
+                <div class="frmmain" style="padding-top: 24px !important;">
+                    <div class="tabcnt settabcnt" data-username-changes-left="{{.UsernameChangesLeft}}" data-error="{{.Error}}" data-success="{{.Success}}">
+                        <div class="tablst">
+                            <div class="tabind"></div>
+                            <button class="tabbtn{{if eq .ActiveTab "account"}} active{{end}}" onclick="switchSettingsTab('account', event)">Account</button>
+                            <button class="tabbtn{{if eq .ActiveTab "profile"}} active{{end}}" onclick="switchSettingsTab('profile', event)">Profile</button>
+                        </div>
+
+                        <div class="settabvwp">
+                            {{template "components/settings/account" .}}
+                            {{template "components/settings/profile" .}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{template "elements/modal"}}
+{{template "elements/musicmodal" .}}
+
+<script src="/static/js/elements/modal.js"></script>
+<script src="/static/js/elements/music.js"></script>
+<script src="/static/js/settings/settings.js"></script>
